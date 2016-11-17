@@ -52,6 +52,8 @@
 - (void)scrollViewContentOffsetChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
     
     
+
+    
     if (self.state == JRRefreshStateRefreshing) {
         
         if (!self.window) {
@@ -69,15 +71,24 @@
         return;
     }
     
-    self.pullPercent = offSetY/self.originalInset.top;
-    if (_JRRefreshHeaderPullingBlock) {
-        _JRRefreshHeaderPullingBlock(self.pullPercent);
-    }
     
-    if (!scrollView.isDragging) {
+    if (scrollView.isDragging) {
+
+        self.state = JRRefreshStatePulling;
+        self.pullPercent = offSetY/self.originalInset.top;
+        if (self.pullPercent < 0) {
+            self.pullPercent = 0.0;
+        }
+        if (self.pullPercent > 1) {
+            self.pullPercent = 1.0;
+        }
+        if (_JRRefreshHeaderPullingBlock) {
+            _JRRefreshHeaderPullingBlock(self.pullPercent);
+        }
+    }else {
         
     }
-    
+
     
 }
 
