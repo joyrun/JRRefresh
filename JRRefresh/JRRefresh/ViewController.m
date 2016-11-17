@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "JRRefresh.h"
+#import "UIScrollView+JRRefresh.h"
+#import "JRRefreshHeader.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -20,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    self.view.backgroundColor = [UIColor grayColor];
+    self.tableView.jr_header = [[JRRefreshHeader alloc] init];
+    
 }
 
 - (UITableView *)tableView {
@@ -30,6 +36,19 @@
         _tableView.backgroundColor = [UIColor whiteColor];
     }
     return _tableView;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 50;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   static NSString *identifier = @"identifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {

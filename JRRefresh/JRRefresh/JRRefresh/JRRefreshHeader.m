@@ -73,6 +73,12 @@
     if (_JRRefreshHeaderPullingBlock) {
         _JRRefreshHeaderPullingBlock(self.pullPercent);
     }
+    
+    if (!scrollView.isDragging) {
+        
+    }
+    
+    
 }
 
 - (void)scrollViewContentSizeChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {

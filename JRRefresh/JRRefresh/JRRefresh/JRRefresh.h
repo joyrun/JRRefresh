@@ -9,8 +9,7 @@
 #ifndef JRRefresh_h
 #define JRRefresh_h
 
-#import "UIScrollView+JRRefresh.h"
-#import "JRRefreshHeader.h"
+
 
 
 #endif /* JRRefresh_h */

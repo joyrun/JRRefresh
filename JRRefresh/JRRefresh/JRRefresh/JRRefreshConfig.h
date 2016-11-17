@@ -15,7 +15,6 @@
 #define JRREFRESH_CONTENTINSET @"contentInset"
 #define JRREFRESH_GESTURESTATE @"state"
 
-CGFloat const jr_defaultRefreshHeaderHeight = 40.0;
 
 /** 刷新控件的状态 */
 typedef NS_ENUM(NSInteger, JRRefreshState) {
