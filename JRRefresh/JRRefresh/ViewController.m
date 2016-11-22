@@ -24,7 +24,10 @@
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor grayColor];
-    self.tableView.jr_header = [[JRRefreshHeader alloc] init];
+    
+    JRRefreshHeader *header = [[JRRefreshHeader alloc] initWithFrame:CGRectMake(0, -20, 200, 60)];
+    header.backgroundColor = [UIColor yellowColor];
+    self.tableView.jr_header = header;
     
 }
 

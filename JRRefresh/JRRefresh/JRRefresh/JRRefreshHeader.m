@@ -8,13 +8,14 @@
 
 #import "JRRefreshHeader.h"
 #import "JRRefreshObseversManager.h"
-
+#import "JRRefreshConfig.h"
 @implementation JRRefreshHeader
 
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self FinishBlocks];
     }
     return self;
@@ -28,10 +29,7 @@
     __weak typeof(self) weakSelf = self;
     
     [self.observersManager setScrollViewContentOffsetChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        
         [weakSelf scrollViewContentOffsetChange:change scrollView:scrollView];
-
-        
     }];
     
     [self.observersManager setScrollViewContentSizeChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
@@ -72,19 +70,30 @@
     }
     
     
+    //下拉百分比
+    self.pullPercent = offSetY/self.originalInset.top;
+    if (self.pullPercent < 0) {
+        self.pullPercent = 0.0;
+    }
+    if (self.pullPercent > 1) {
+        self.pullPercent = 1.0;
+    }
+    
+    if (_JRRefreshHeaderPullingBlock) {
+        _JRRefreshHeaderPullingBlock(self.pullPercent);
+    }
+    
+    
     if (scrollView.isDragging) {
-
-        self.state = JRRefreshStatePulling;
-        self.pullPercent = offSetY/self.originalInset.top;
-        if (self.pullPercent < 0) {
-            self.pullPercent = 0.0;
+        
+        if (offSetY >= self.jr_height) { //超过
+            self.state = JRRefreshStateWillRefresh;
+            self.state = JRRefreshStatePulling;
+        }else {
+            
         }
-        if (self.pullPercent > 1) {
-            self.pullPercent = 1.0;
-        }
-        if (_JRRefreshHeaderPullingBlock) {
-            _JRRefreshHeaderPullingBlock(self.pullPercent);
-        }
+        
+        
     }else {
         
     }

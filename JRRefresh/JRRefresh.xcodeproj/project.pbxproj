@@ -20,6 +20,9 @@
 		5E0770811DDDA1C2002688D0 /* JRRefreshObseversManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E07707A1DDDA1C2002688D0 /* JRRefreshObseversManager.m */; };
 		5E0770821DDDA1C2002688D0 /* UIScrollView+JRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E07707C1DDDA1C2002688D0 /* UIScrollView+JRRefresh.m */; };
 		5E0770831DDDA1C2002688D0 /* UIView+JRAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E07707E1DDDA1C2002688D0 /* UIView+JRAddition.m */; };
+		5EE91D231DE3E6E3009101D2 /* JRRefreshActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE91D221DE3E6E3009101D2 /* JRRefreshActivityIndicator.m */; };
+		5EE91D261DE3E917009101D2 /* JRRefreshCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE91D251DE3E917009101D2 /* JRRefreshCircleView.m */; };
+		5EE91D291DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE91D281DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,12 @@
 		5E07707C1DDDA1C2002688D0 /* UIScrollView+JRRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+JRRefresh.m"; sourceTree = "<group>"; };
 		5E07707D1DDDA1C2002688D0 /* UIView+JRAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JRAddition.h"; sourceTree = "<group>"; };
 		5E07707E1DDDA1C2002688D0 /* UIView+JRAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JRAddition.m"; sourceTree = "<group>"; };
+		5EE91D211DE3E6E3009101D2 /* JRRefreshActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRRefreshActivityIndicator.h; sourceTree = "<group>"; };
+		5EE91D221DE3E6E3009101D2 /* JRRefreshActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRRefreshActivityIndicator.m; sourceTree = "<group>"; };
+		5EE91D241DE3E917009101D2 /* JRRefreshCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRRefreshCircleView.h; sourceTree = "<group>"; };
+		5EE91D251DE3E917009101D2 /* JRRefreshCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRRefreshCircleView.m; sourceTree = "<group>"; };
+		5EE91D271DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRRefreshCircleViewBgLayer.h; sourceTree = "<group>"; };
+		5EE91D281DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRRefreshCircleViewBgLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +182,12 @@
 				5E07707C1DDDA1C2002688D0 /* UIScrollView+JRRefresh.m */,
 				5E07707D1DDDA1C2002688D0 /* UIView+JRAddition.h */,
 				5E07707E1DDDA1C2002688D0 /* UIView+JRAddition.m */,
+				5EE91D211DE3E6E3009101D2 /* JRRefreshActivityIndicator.h */,
+				5EE91D221DE3E6E3009101D2 /* JRRefreshActivityIndicator.m */,
+				5EE91D241DE3E917009101D2 /* JRRefreshCircleView.h */,
+				5EE91D251DE3E917009101D2 /* JRRefreshCircleView.m */,
+				5EE91D271DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.h */,
+				5EE91D281DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.m */,
 			);
 			path = JRRefresh;
 			sourceTree = "<group>";
@@ -314,7 +329,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E0770811DDDA1C2002688D0 /* JRRefreshObseversManager.m in Sources */,
+				5EE91D291DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.m in Sources */,
 				5E0770471DDDA1A3002688D0 /* ViewController.m in Sources */,
+				5EE91D261DE3E917009101D2 /* JRRefreshCircleView.m in Sources */,
+				5EE91D231DE3E6E3009101D2 /* JRRefreshActivityIndicator.m in Sources */,
 				5E0770831DDDA1C2002688D0 /* UIView+JRAddition.m in Sources */,
 				5E0770821DDDA1C2002688D0 /* UIScrollView+JRRefresh.m in Sources */,
 				5E0770441DDDA1A3002688D0 /* AppDelegate.m in Sources */,
@@ -556,6 +574,7 @@
 				5E07706B1DDDA1A3002688D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E07706C1DDDA1A3002688D0 /* Build configuration list for PBXNativeTarget "JRRefreshTests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +583,7 @@
 				5E07706E1DDDA1A3002688D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E07706F1DDDA1A3002688D0 /* Build configuration list for PBXNativeTarget "JRRefreshUITests" */ = {
 			isa = XCConfigurationList;
@@ -572,6 +592,7 @@
 				5E0770711DDDA1A3002688D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

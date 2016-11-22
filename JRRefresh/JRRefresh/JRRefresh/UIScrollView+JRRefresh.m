@@ -19,9 +19,10 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 - (void)setJr_header:(JRRefreshHeader *)jr_header {
     
     if (jr_header != self.jr_header) {
+        
         [self.jr_header removeFromSuperview];
-//        [self insertSubview:jr_header atIndex:0];
-        [self addSubview:jr_header];
+        [self insertSubview:jr_header atIndex:0];
+//        [self addSubview:jr_header];
         objc_setAssociatedObject(self, &kJr_headerKey, jr_header, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
