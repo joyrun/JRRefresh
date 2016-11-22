@@ -20,6 +20,8 @@
 
 - (id)initWithCenter:(CGPoint)center;
 - (void)setProgress:(double)progress scrollView:(UIScrollView*)scrollView;
+- (void)setIndicatorProgress:(double)progress;
+
 - (void)startLoadingAnimation;
 - (void)stopLoadingAnimation;
 - (void)showRoundCornerBG:(BOOL)show;

@@ -9,8 +9,18 @@
 #import "JRRefreshHeader.h"
 #import "JRRefreshObseversManager.h"
 #import "JRRefreshConfig.h"
-@implementation JRRefreshHeader
+#import "JRRefreshCircleView.h"
 
+
+@interface JRRefreshHeader ()
+
+@property (nonatomic, assign) BOOL isLoading;
+
+
+@end
+
+
+@implementation JRRefreshHeader
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,32 +43,22 @@
     }];
     
     [self.observersManager setScrollViewContentSizeChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        
         [weakSelf scrollViewGestureStateChange:change scrollView:scrollView];
-        
     }];
     
     
     [self.observersManager setScrollViewGestureStateChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        
         [weakSelf scrollViewGestureStateChange:change scrollView:scrollView];
-        
     }];
     
 }
 
 - (void)scrollViewContentOffsetChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
     
-    
-
-    
     if (self.state == JRRefreshStateRefreshing) {
-        
         if (!self.window) {
             return;
         }
-        //？？
-        CGFloat insetT = scrollView.contentOffset.y > self.originalInset.top ? -scrollView.contentOffset.y : self.originalInset.top;
     }
     
     self.originalInset = scrollView.contentInset;
@@ -69,9 +69,8 @@
         return;
     }
     
-    
-    //下拉百分比
-    self.pullPercent = offSetY/self.originalInset.top;
+    //下拉百分比
+    self.pullPercent = (happenOffSetY-offSetY)/self.jr_height;
     if (self.pullPercent < 0) {
         self.pullPercent = 0.0;
     }
@@ -79,26 +78,30 @@
         self.pullPercent = 1.0;
     }
     
-    if (_JRRefreshHeaderPullingBlock) {
-        _JRRefreshHeaderPullingBlock(self.pullPercent);
+    if (!_isLoading) {
+        
+        if (_JRRefreshHeaderPullingBlock) {
+            _JRRefreshHeaderPullingBlock(self.pullPercent);
+        }
     }
-    
     
     if (scrollView.isDragging) {
         
-        if (offSetY >= self.jr_height) { //超过
-            self.state = JRRefreshStateWillRefresh;
-            self.state = JRRefreshStatePulling;
-        }else {
-            
+        if (self.pullPercent >= 1) { //超过
+            self.state = JRRefreshStateWillRefreshPulling;
         }
-        
-        
     }else {
-        
+        if (self.pullPercent >= 1) {
+            if (self.state == JRRefreshStateWillRefreshPulling) {
+                self.state = JRRefreshStateRefreshing;
+            }
+        }
     }
 
+    [self switchByState:self.state];
     
+    _indicatorView.jr_top =  offSetY - happenOffSetY + 10;
+    JR_DebugLog(@"offset -- %f",offSetY);
 }
 
 - (void)scrollViewContentSizeChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
@@ -108,15 +111,22 @@
     
 }
 
+- (void)switchByState:(JRRefreshState)state {
 
-- (void)switchState:(JRRefreshState )state {
-    
+    if (_isLoading) {
+        return;
+    }
     switch (state) {
         case JRRefreshStateDefault:
             break;
-        case JRRefreshStatePulling:
+        case JRRefreshStateWillRefreshPulling:
             break;
-        case JRRefreshStateRefreshing:
+        case JRRefreshStateNotRefreshPulling:
+            break;
+        case JRRefreshStateRefreshing:{
+            [_indicatorView startLoadingAnimation];
+            _isLoading = YES;
+        }
             break;
         case JRRefreshStateWillRefresh:
             break;
@@ -127,5 +137,7 @@
     }
     
 }
+
+
 
 @end

@@ -42,12 +42,12 @@
 
 - (void)_commonInit
 {
-    //    self.alpha = 0;
     
     self.borderColor = JR_RGBA(216, 67, 77, 1);
     self.borderWidth = 2.0f;
     self.contentMode = UIViewContentModeRedraw;
     self.backgroundColor = [UIColor clearColor];
+    
     //init actitvity indicator
     _activityIndicatorView = [[JRRefreshActivityIndicator alloc] initWithFrame:self.bounds];
     [self addSubview:_activityIndicatorView];
@@ -120,34 +120,43 @@
         //to prevent showing in some circumstances (updating contentOffset)
         if(scrollView.isDragging || scrollView.isDecelerating || self.updatingScrollViewOffset || oldProgress > self.progress)
         {
-            //			self.alpha = self.progress;
-            [self setLayerOpacity:self.progress];
+            [self setIndicatorProgress:progress];
             
-            //rotation Animation
-            CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-            animationImage.fromValue = [NSNumber numberWithFloat:JR_DEGREES_TO_RADIANS(0 - 360.0 * oldProgress)];
-            animationImage.toValue = [NSNumber numberWithFloat:JR_DEGREES_TO_RADIANS(0 - 360.0 * self.progress)];
-            animationImage.duration = 0.0;
-            animationImage.removedOnCompletion = NO;
-            animationImage.fillMode = kCAFillModeForwards;
-            
-            //strokeAnimation
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-            animation.fromValue = [NSNumber numberWithFloat:((CAShapeLayer *)self.shapeLayer.presentationLayer).strokeEnd];
-            animation.toValue = [NSNumber numberWithFloat:self.progress];
-            //			animation.duration = 0.35 + 0.25 * (fabs([animation.fromValue doubleValue] - [animation.toValue doubleValue]));
-            animation.duration = 0;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-            
-            [self.imageLayer addAnimation:animationImage forKey:@"animation"];
-            [self.shapeLayer addAnimation:animation forKey:@"animation"];
         }
     }
     
+}
+
+- (void)setIndicatorProgress:(double)progress {
+    
+    CGFloat oldProgress = _progress;
+    _progress = progress;
+    
+    [self setLayerOpacity:_progress];
+    
+    //rotation Animation
+    CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    animationImage.fromValue = [NSNumber numberWithFloat:JR_DEGREES_TO_RADIANS(0 - 360.0 * oldProgress)];
+    animationImage.toValue = [NSNumber numberWithFloat:JR_DEGREES_TO_RADIANS(0 - 360.0 * _progress)];
+    animationImage.duration = 0.0;
+    animationImage.removedOnCompletion = NO;
+    animationImage.fillMode = kCAFillModeForwards;
+    
+    //strokeAnimation
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    animation.fromValue = [NSNumber numberWithFloat:((CAShapeLayer *)self.shapeLayer.presentationLayer).strokeEnd];
+    animation.toValue = [NSNumber numberWithFloat:self.progress];
+    animation.duration = 0;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    
+    [self.imageLayer addAnimation:animationImage forKey:@"animation"];
+    [self.shapeLayer addAnimation:animation forKey:@"animation"];
     
 }
+
+
 -(void)setLayerOpacity:(CGFloat)opacity
 {
     self.imageLayer.opacity = opacity;

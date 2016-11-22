@@ -10,6 +10,7 @@
 #import "JRRefresh.h"
 #import "UIScrollView+JRRefresh.h"
 #import "JRRefreshHeader.h"
+#import "JRRefreshCircleView.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,7 +27,13 @@
     self.view.backgroundColor = [UIColor grayColor];
     
     JRRefreshHeader *header = [[JRRefreshHeader alloc] initWithFrame:CGRectMake(0, -20, 200, 60)];
-    header.backgroundColor = [UIColor yellowColor];
+    JRRefreshCircleView *cir = [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(self.tableView.jr_centerX, 20)];
+    [self.tableView addSubview:cir];
+    header.indicatorView = cir;
+    [header setJRRefreshHeaderPullingBlock:^(CGFloat percent) {
+        JR_DebugLog(@"%f",percent);
+        [cir setProgress:percent scrollView:self.tableView];
+    }];
     self.tableView.jr_header = header;
     
 }
@@ -36,7 +43,7 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.backgroundColor = [UIColor grayColor];
     }
     return _tableView;
 }
@@ -46,10 +53,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
    static NSString *identifier = @"identifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.backgroundColor = [UIColor grayColor];
     }
     return cell;
 }

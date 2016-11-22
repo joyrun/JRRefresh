@@ -8,6 +8,7 @@
 
 #import "UIScrollView+JRRefresh.h"
 #import "JRRefreshHeader.h"
+#import "JRRefreshCircleView.h"
 #import <objc/runtime.h>
 
 static NSString *kJr_headerKey = @"kJr_headerKey";
@@ -22,7 +23,6 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
         
         [self.jr_header removeFromSuperview];
         [self insertSubview:jr_header atIndex:0];
-//        [self addSubview:jr_header];
         objc_setAssociatedObject(self, &kJr_headerKey, jr_header, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
@@ -38,4 +38,9 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     return nil;
 }
 
+
+- (void)stopLoading {
+    [self.jr_header.indicatorView stopLoadingAnimation];
+    
+}
 @end

@@ -16,6 +16,7 @@
 @property (nonatomic,strong) JRRefreshHeader *jr_header;
 @property (nonatomic,strong) UIView *jr_footer;
 
+- (void)stopLoading;
 
 //- (void)scrollPullDownRefresh;
 //- (void)noScrollTopRefresh;

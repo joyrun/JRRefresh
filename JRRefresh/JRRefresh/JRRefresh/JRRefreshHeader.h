@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JRRefreshBaseView.h"
+@class JRRefreshCircleView;
 
 @interface JRRefreshHeader : JRRefreshBaseView
 
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) UIView *defaultView;
 @property (nonatomic, strong) UIView *refreshingView;
 @property (nonatomic, strong) UIView *draggingView;
+
+
+@property (nonatomic, strong) JRRefreshCircleView *indicatorView;
 
 
 @end
