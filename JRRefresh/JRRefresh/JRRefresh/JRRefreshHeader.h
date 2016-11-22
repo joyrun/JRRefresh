@@ -17,9 +17,9 @@
 @property (nonatomic, copy) void(^JRRefreshHeaderBegainRefreshCompletionBlock)();
 @property (nonatomic, assign) CGFloat pullPercent;
 
-@property (nonatomic, strong) UIView *defaultView;
-@property (nonatomic, strong) UIView *refreshingView;
-@property (nonatomic, strong) UIView *draggingView;
+//@property (nonatomic, strong) UIView *defaultView;
+//@property (nonatomic, strong) UIView *refreshingView;
+//@property (nonatomic, strong) UIView *draggingView;
 
 
 @property (nonatomic, strong) JRRefreshCircleView *indicatorView;

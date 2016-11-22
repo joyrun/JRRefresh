@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class JRRefreshHeader;
+@class JRRefreshHeader,JRRefreshFooter;
 
 
 @interface UIScrollView (JRRefresh)
 
 @property (nonatomic,strong) JRRefreshHeader *jr_header;
-@property (nonatomic,strong) UIView *jr_footer;
+@property (nonatomic,strong) JRRefreshFooter *jr_footer;
 
-- (void)stopLoading;
+
+- (void)jr_starRefresh;
+- (void)jr_starLoadMore;
+- (void)jr_stopLoading;
 
 //- (void)scrollPullDownRefresh;
 //- (void)noScrollTopRefresh;

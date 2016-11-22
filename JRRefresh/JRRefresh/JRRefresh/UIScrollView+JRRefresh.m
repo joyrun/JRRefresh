@@ -9,7 +9,11 @@
 #import "UIScrollView+JRRefresh.h"
 #import "JRRefreshHeader.h"
 #import "JRRefreshCircleView.h"
+#import "JRRefreshFooter.h"
 #import <objc/runtime.h>
+
+#define RefreshFooterViewDefaultHeight  65.0
+
 
 static NSString *kJr_headerKey = @"kJr_headerKey";
 static NSString *kJr_footerKey = @"kJr_footerKey";
@@ -32,15 +36,29 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 }
 
 - (void)setJr_footer:(UIView *)jr_footer {
-    
+    if (jr_footer != self.jr_footer) {
+        [self.jr_footer removeFromSuperview];
+        [self insertSubview:jr_footer atIndex:0];
+        objc_setAssociatedObject(self, &kJr_footerKey, jr_footer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        if (self.jr_footer.jr_height <= 0   ) {
+            self.jr_footer.jr_height = RefreshFooterViewDefaultHeight;
+        }
+        self.jr_footer.frame = CGRectMake(0, self.contentSize.height, self.jr_width, self.jr_footer.jr_height);
+        self.jr_footer.backgroundColor = [UIColor whiteColor];
+    }
 }
 - (UIView *)jr_footer {
-    return nil;
+    return objc_getAssociatedObject(self, &kJr_footerKey);
 }
 
 
-- (void)stopLoading {
+- (void)jr_stopLoading {
     [self.jr_header.indicatorView stopLoadingAnimation];
+    [self.jr_footer stopLoading];
+}
+
+- (void)jr_starRefresh {
+    [self.jr_header.indicatorView startLoadingAnimation];
     
 }
 @end

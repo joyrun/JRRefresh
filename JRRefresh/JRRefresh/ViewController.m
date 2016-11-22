@@ -8,9 +8,7 @@
 
 #import "ViewController.h"
 #import "JRRefresh.h"
-#import "UIScrollView+JRRefresh.h"
-#import "JRRefreshHeader.h"
-#import "JRRefreshCircleView.h"
+
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -36,6 +34,9 @@
     }];
     self.tableView.jr_header = header;
     
+    
+    self.tableView.jr_footer = [[JRRefreshFooter alloc] init];
+
 }
 
 - (UITableView *)tableView {

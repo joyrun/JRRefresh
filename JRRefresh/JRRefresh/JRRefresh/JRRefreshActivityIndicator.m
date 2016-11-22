@@ -41,7 +41,7 @@
         CALayer *imageLayer = [CALayer layer];
         imageLayer.contentsScale = [UIScreen mainScreen].scale;
         imageLayer.frame = self.bounds;
-        imageLayer.contents =(__bridge id _Nullable)([UIImage imageNamed:@"refresh_indicator"].CGImage);
+        imageLayer.contents =(__bridge id)([UIImage imageNamed:@"refresh_indicator"].CGImage);
         imageLayer.contentsGravity = kCAGravityResizeAspect;
         [self.layer addSublayer:imageLayer];
         self.imageLayer = imageLayer;

@@ -43,7 +43,7 @@
     }];
     
     [self.observersManager setScrollViewContentSizeChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        [weakSelf scrollViewGestureStateChange:change scrollView:scrollView];
+        [weakSelf scrollViewContentSizeChange:change scrollView:scrollView];
     }];
     
     
@@ -63,7 +63,7 @@
     
     self.originalInset = scrollView.contentInset;
     CGFloat offSetY = scrollView.contentOffset.y;
-    CGFloat happenOffSetY = - self.originalInset.top;
+    CGFloat happenOffSetY = - self.originalInset.top; //offSetY初始值不一定为0，需与happenOffSetY结合使用
     
     if (offSetY > happenOffSetY) {
         return;
@@ -101,10 +101,11 @@
     [self switchByState:self.state];
     
     _indicatorView.jr_top =  offSetY - happenOffSetY + 10;
-    JR_DebugLog(@"offset -- %f",offSetY);
+    JR_DebugLog(@"offset --: %f  happenOffsety-- :%f",offSetY,happenOffSetY);
 }
 
 - (void)scrollViewContentSizeChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
+
 }
 
 - (void)scrollViewGestureStateChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
