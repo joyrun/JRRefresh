@@ -16,5 +16,4 @@
 
 
 
-
 #endif /* JRRefresh_h */

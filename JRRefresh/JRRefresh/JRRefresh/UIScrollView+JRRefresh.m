@@ -59,6 +59,21 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 
 - (void)jr_starRefresh {
     [self.jr_header.indicatorView startLoadingAnimation];
+}
+
+- (void)jr_starLoadMore {
     
+}
+
+- (void)jr_reloadd {
+    [self jr_reloadd];
+    
+    
+}
+
++ (void)load {
+    Method m1 = class_getInstanceMethod(self, reload);
+    
+    method_exchangeImplementations(<#Method m1#>, <#Method m2#>)
 }
 @end

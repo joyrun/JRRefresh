@@ -38,6 +38,8 @@
         return;
     }
     [self.observersManager willAddSubview:self toSuperView:newSuperview];
+
+    
 }
 
 - (JRRefreshObseversManager *)observersManager {

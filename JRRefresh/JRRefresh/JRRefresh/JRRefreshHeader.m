@@ -26,12 +26,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        [self viewSetup];
         [self FinishBlocks];
+        
     }
     return self;
 }
 - (instancetype)init {
     return [self initWithFrame:CGRectZero];
+}
+- (void)viewSetup {
+    [self.observersManager.scrollView addSubview:self.indicatorView];
 }
 - (void)FinishBlocks {
     
@@ -139,6 +144,7 @@
     
 }
 
+//默认的
 
 
 @end

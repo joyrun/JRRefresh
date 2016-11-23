@@ -21,8 +21,4 @@
 - (void)jr_starLoadMore;
 - (void)jr_stopLoading;
 
-//- (void)scrollPullDownRefresh;
-//- (void)noScrollTopRefresh;
-//- (void)noScrollCenterRefresh;
-
 @end

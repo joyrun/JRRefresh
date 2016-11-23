@@ -19,7 +19,6 @@
     self.subView = subView;
     self.scrollView = (UIScrollView *)superView;
     
-//    [self removeObservers];
     self.subView.jr_width = superView.jr_width;
     self.subView.jr_left = 0;
     _scrollView.alwaysBounceVertical = YES;

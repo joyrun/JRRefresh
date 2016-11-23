@@ -97,9 +97,12 @@
         _defaultIndicator = [[JRRefreshActivityIndicator alloc] initWithCenter:CGPointMake(self.jr_width / 2, 30)];
         _defaultIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftAndRightMargin;
     }
-//    if (self.customIndicator) {
-//        _defaultIndicator = self.customIndicator;//customIndicator为自定义指示器，暴露于头文件。
-//    }
     return _defaultIndicator;
+}
+
+- (void)setCustomIndicator:(JRRefreshActivityIndicator *)customIndicator {
+    _customIndicator = customIndicator;
+    _defaultIndicator = customIndicator;
+    
 }
 @end
