@@ -32,7 +32,11 @@
 
 - (void)customMethodAfterReloadData {
     
-    
+    if (self.numberOfSections == 0) {
+        [self jr_hideFooter];
+    }else {
+        [self jr_showFooter];
+    }
     
 }
 

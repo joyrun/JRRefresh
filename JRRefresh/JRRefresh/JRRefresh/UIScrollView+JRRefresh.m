@@ -11,6 +11,7 @@
 #import "JRRefreshCircleView.h"
 #import "JRRefreshFooter.h"
 #import <objc/runtime.h>
+#import "JRRefreshActivityIndicator.h"
 
 #define RefreshFooterViewDefaultHeight  65.0
 
@@ -44,7 +45,6 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
             self.jr_footer.jr_height = RefreshFooterViewDefaultHeight;
         }
         self.jr_footer.frame = CGRectMake(0, self.contentSize.height, self.jr_width, self.jr_footer.jr_height);
-        self.jr_footer.backgroundColor = [UIColor whiteColor];
     }
 }
 - (UIView *)jr_footer {
@@ -66,13 +66,25 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 }
 
 - (void)jr_hideFooter {
-    
+    self.jr_footer.isHideFooter = YES;
 }
 - (void)jr_showFooter {
+    self.jr_footer.isHideFooter= NO;
+}
+
+- (void)jr_setHeaderIndicatorView:(UIView *) indicatorView{
     
 }
-- (void)jr_removeFooter {
+- (UIView *)jr_headerIndicatorView {
+    return self.jr_header.indicatorView;
+}
+- (void)jr_setFooterIndicatorView:(UIView *) indicatorView{
     
 }
+- (UIView *)jr_footerIndicatorView {
+    return self.jr_footer.customIndicator;
+}
+
+
 
 @end

@@ -23,7 +23,7 @@
 #define JR_DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
 #define JR_RADIANS_TO_DEGREES(x) (x)/M_PI*180.0
 #define JR_RGBA(R,G,B,A)	[UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-
+#define JR_FOOTER_EXTEND 65.0
 /** 刷新控件的状态 */
 typedef NS_ENUM(NSInteger, JRRefreshState) {
     /** 普通闲置状态 */

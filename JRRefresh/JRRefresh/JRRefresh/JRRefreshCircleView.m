@@ -32,12 +32,24 @@
 
 - (id)initWithCenter:(CGPoint)center
 {
-    int size = 25;
+    float size = 25;
     self = [super initWithFrame:CGRectMake(center.x - size/2, center.y - size/2, size, size)];
     if(self) {
         [self _commonInit];
     }
     return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self _commonInit];
+    }
+    return self;
+}
+
+- (instancetype)init {
+    return [self initWithFrame:CGRectZero];
 }
 
 - (void)_commonInit

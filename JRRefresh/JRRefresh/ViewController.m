@@ -25,18 +25,9 @@
     self.view.backgroundColor = [UIColor grayColor];
     
     JRRefreshHeader *header = [[JRRefreshHeader alloc] initWithFrame:CGRectMake(0, -20, 200, 60)];
-    JRRefreshCircleView *cir = [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(self.tableView.jr_centerX, 20)];
-    [self.tableView addSubview:cir];
-    header.indicatorView = cir;
-    [header setJRRefreshHeaderPullingBlock:^(CGFloat percent) {
-        JR_DebugLog(@"%f",percent);
-        [cir setProgress:percent scrollView:self.tableView];
-    }];
     self.tableView.jr_header = header;
-    
-    
     self.tableView.jr_footer = [[JRRefreshFooter alloc] init];
-
+    
 }
 
 - (UITableView *)tableView {

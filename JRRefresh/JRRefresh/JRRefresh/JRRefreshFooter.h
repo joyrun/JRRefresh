@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign) CGFloat pullPercent;
 @property (nonatomic, strong) JRRefreshActivityIndicator *customIndicator;
+@property (nonatomic, assign) BOOL isHideFooter;
 
 - (void)stopLoading;
 

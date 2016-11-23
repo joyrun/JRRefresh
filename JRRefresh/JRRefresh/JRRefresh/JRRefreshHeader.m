@@ -13,9 +13,11 @@
 
 
 @interface JRRefreshHeader ()
-
+{
+    CGFloat _defaulIndicatorTop;
+    
+}
 @property (nonatomic, assign) BOOL isLoading;
-
 
 @end
 
@@ -26,8 +28,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self viewSetup];
         [self FinishBlocks];
+        _defaulIndicatorTop = 10.0;
+        
         
     }
     return self;
@@ -35,7 +38,10 @@
 - (instancetype)init {
     return [self initWithFrame:CGRectZero];
 }
-- (void)viewSetup {
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    
     [self.observersManager.scrollView addSubview:self.indicatorView];
 }
 - (void)FinishBlocks {
@@ -84,14 +90,15 @@
     }
     
     if (!_isLoading) {
-        
         if (_JRRefreshHeaderPullingBlock) {
             _JRRefreshHeaderPullingBlock(self.pullPercent);
         }
     }
     
+    
+    
+    //状态切换
     if (scrollView.isDragging) {
-        
         if (self.pullPercent >= 1) { //超过
             self.state = JRRefreshStateWillRefreshPulling;
         }
@@ -102,10 +109,13 @@
             }
         }
     }
-
     [self switchByState:self.state];
     
-    _indicatorView.jr_top =  offSetY - happenOffSetY + 10;
+    
+    //指示器
+    self.indicatorView.jr_top =  offSetY - happenOffSetY + _defaulIndicatorTop;
+    
+    [self.indicatorView setProgress:self.pullPercent scrollView:scrollView];
     JR_DebugLog(@"offset --: %f  happenOffsety-- :%f",offSetY,happenOffSetY);
 }
 
@@ -144,7 +154,15 @@
     
 }
 
-//默认的
+- (void)setIndicatorTopDistance:(CGFloat)distance {
+    _defaulIndicatorTop = distance;
+    
+}
 
-
+- (JRRefreshCircleView *)indicatorView{
+    if (!_indicatorView) {
+        _indicatorView =  [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(self.observersManager.scrollView.jr_centerX, 0)];
+    }
+    return _indicatorView;
+}
 @end

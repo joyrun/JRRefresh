@@ -10,10 +10,10 @@
 #define JRRefresh_h
 
 #import "UIScrollView+JRRefresh.h"
+#import "UITableView+JRRefresh.h"
+#import "UICollectionView+JRRefresh.h"
 #import "JRRefreshHeader.h"
 #import "JRRefreshCircleView.h"
 #import "JRRefreshFooter.h"
-
-
 
 #endif /* JRRefresh_h */

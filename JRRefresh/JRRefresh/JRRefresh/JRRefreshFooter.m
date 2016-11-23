@@ -9,6 +9,7 @@
 #import "JRRefreshFooter.h"
 #import "JRRefreshObseversManager.h"
 #import "JRRefreshActivityIndicator.h"
+#import "JRRefreshConfig.h"
 
 #define BOTTOM_LOAD_MORE_OFFSET -100.0f
 
@@ -59,11 +60,11 @@
     if (_isLoading) {
         return;
     }
-    
+    if (_isHideFooter) {
+        return;
+    }
     if (scrollView.contentOffset.y + scrollView.jr_height > BOTTOM_LOAD_MORE_OFFSET + scrollView.contentSize.height) {
-        
         [self starLoading];
-        scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, scrollView.contentInset.left, scrollView.contentInset.bottom + 65, scrollView.contentInset.right);
         JR_DebugLog(@" --scrollView.contentOffset.y %f",scrollView.contentOffset.y);
     }
 }
@@ -84,11 +85,20 @@
     [self.defaultIndicator startAnimating];
     _isLoading = YES;
 
+    UIScrollView *scrollView = self.observersManager.scrollView;
+    scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, scrollView.contentInset.left, scrollView.contentInset.bottom + JR_FOOTER_EXTEND, scrollView.contentInset.right);
 }
 - (void)stopLoading {
+    
+    if (!_isLoading) {
+        return;
+    }
     [self.defaultIndicator stopAnimating];
     self.defaultIndicator.hidden = YES;
     _isLoading = NO;
+    
+    UIScrollView *scrollView = self.observersManager.scrollView;
+    scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, scrollView.contentInset.left, scrollView.contentInset.bottom - JR_FOOTER_EXTEND, scrollView.contentInset.right);
 }
 
 - (JRRefreshActivityIndicator *)defaultIndicator {
@@ -105,4 +115,10 @@
     _defaultIndicator = customIndicator;
     
 }
+- (void)setIsHideFooter:(BOOL)isHideFooter {
+    _isHideFooter = isHideFooter;
+    self.hidden = isHideFooter;
+}
+
+
 @end

@@ -19,5 +19,7 @@
 
 @property (nonatomic, strong) JRRefreshCircleView *indicatorView;
 
+- (void)setIndicatorTopDistance:(CGFloat)distance;
+
 
 @end

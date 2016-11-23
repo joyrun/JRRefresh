@@ -23,4 +23,15 @@
 - (void)jr_hideFooter;
 - (void)jr_showFooter;
 
+
+- (void)jr_setHeaderIndicatorView:(UIView *) indicatorView;
+- (UIView *)jr_headerIndicatorView;
+- (void)jr_setFooterIndicatorView:(UIView *) indicatorView;
+- (UIView *)jr_footerIndicatorView;
+
+
+
+- (void)jr_setHeaderIndicatorCircleImage:(UIImage *)image;
+- (void)jr_setHeaderIndicatorBgImage:(UIImage *)image;
+
 @end

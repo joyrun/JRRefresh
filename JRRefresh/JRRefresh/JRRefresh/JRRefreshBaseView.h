@@ -16,7 +16,6 @@
 
 
 @property (assign, nonatomic) JRRefreshState state;
-@property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic, strong) JRRefreshObseversManager *observersManager;
 @property (nonatomic, assign) UIEdgeInsets originalInset;
 
