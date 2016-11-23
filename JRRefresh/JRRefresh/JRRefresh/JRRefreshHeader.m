@@ -140,7 +140,12 @@
         case JRRefreshStateNotRefreshPulling:
             break;
         case JRRefreshStateRefreshing:{
+            if (_JRRefreshHeaderBegainRefreshCompletionBlock) {
+                _JRRefreshHeaderBegainRefreshCompletionBlock();
+
+            }
             [_indicatorView startLoadingAnimation];
+
             _isLoading = YES;
         }
             break;

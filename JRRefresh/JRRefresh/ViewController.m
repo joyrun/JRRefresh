@@ -26,6 +26,12 @@
     
     JRRefreshHeader *header = [[JRRefreshHeader alloc] initWithFrame:CGRectMake(0, -20, 200, 60)];
     self.tableView.jr_header = header;
+    [header setJRRefreshHeaderBegainRefreshCompletionBlock:^{
+    
+        dispatch_after(<#dispatch_time_t when#>, <#dispatch_queue_t  _Nonnull queue#>, <#^(void)block#>)
+        
+    }];
+    
     self.tableView.jr_footer = [[JRRefreshFooter alloc] init];
     
 }
