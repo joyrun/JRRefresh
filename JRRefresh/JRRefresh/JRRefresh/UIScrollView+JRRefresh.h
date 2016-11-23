@@ -20,5 +20,7 @@
 - (void)jr_starRefresh;
 - (void)jr_starLoadMore;
 - (void)jr_stopLoading;
+- (void)jr_hideFooter;
+- (void)jr_showFooter;
 
 @end

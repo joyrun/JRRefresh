@@ -65,15 +65,14 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     
 }
 
-- (void)jr_reloadd {
-    [self jr_reloadd];
+- (void)jr_hideFooter {
     
+}
+- (void)jr_showFooter {
+    
+}
+- (void)jr_removeFooter {
     
 }
 
-+ (void)load {
-    Method m1 = class_getInstanceMethod(self, reload);
-    
-    method_exchangeImplementations(<#Method m1#>, <#Method m2#>)
-}
 @end
