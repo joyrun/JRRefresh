@@ -24,12 +24,10 @@
     [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor grayColor];
     
-    JRRefreshHeader *header = [[JRRefreshHeader alloc] initWithFrame:CGRectMake(0, -20, 200, 60)];
-    self.tableView.jr_header = header;
-    [header setJRRefreshHeaderBegainRefreshCompletionBlock:^{
-    
-        dispatch_after(<#dispatch_time_t when#>, <#dispatch_queue_t  _Nonnull queue#>, <#^(void)block#>)
-        
+    self.tableView.jr_header = [JRRefreshHeader headerWithRefreshBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableView jr_stopLoading];
+        });
     }];
     
     self.tableView.jr_footer = [[JRRefreshFooter alloc] init];

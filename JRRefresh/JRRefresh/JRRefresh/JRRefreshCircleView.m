@@ -70,8 +70,10 @@
     [self.layer addSublayer:backgroundLayer];
     self.backgroundLayer = backgroundLayer;
     
-    if(!self.imageIcon)
+    if(!self.imageIcon) {
         self.imageIcon = [UIImage imageNamed:@"refresh_logo"];
+    }
+    
     
     //init icon layer
     CALayer *imageLayer = [CALayer layer];

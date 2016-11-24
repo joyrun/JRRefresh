@@ -180,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				5E0770731DDDA1C2002688D0 /* JRRefresh.h */,
+				5E0770761DDDA1C2002688D0 /* JRRefreshConfig.h */,
 				5E07707B1DDDA1C2002688D0 /* UIScrollView+JRRefresh.h */,
 				5E07707C1DDDA1C2002688D0 /* UIScrollView+JRRefresh.m */,
 				5EC608961DE546E0000A8729 /* UITableView+JRRefresh.h */,
@@ -188,7 +189,6 @@
 				5EC6089A1DE54722000A8729 /* UICollectionView+JRRefresh.m */,
 				5E0770741DDDA1C2002688D0 /* JRRefreshBaseView.h */,
 				5E0770751DDDA1C2002688D0 /* JRRefreshBaseView.m */,
-				5E0770761DDDA1C2002688D0 /* JRRefreshConfig.h */,
 				5E0770771DDDA1C2002688D0 /* JRRefreshHeader.h */,
 				5E0770781DDDA1C2002688D0 /* JRRefreshHeader.m */,
 				5EE91D2A1DE4335D009101D2 /* JRRefreshFooter.h */,

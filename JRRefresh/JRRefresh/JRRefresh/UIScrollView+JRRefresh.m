@@ -20,15 +20,14 @@ static NSString *kJr_headerKey = @"kJr_headerKey";
 static NSString *kJr_footerKey = @"kJr_footerKey";
 
 @implementation UIScrollView (JRRefresh)
-
-
 - (void)setJr_header:(JRRefreshHeader *)jr_header {
     
     if (jr_header != self.jr_header) {
-        
         [self.jr_header removeFromSuperview];
         [self insertSubview:jr_header atIndex:0];
         objc_setAssociatedObject(self, &kJr_headerKey, jr_header, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        self.jr_header.backgroundColor = [UIColor whiteColor];
+        
     }
     
 }
@@ -53,12 +52,12 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 
 
 - (void)jr_stopLoading {
-    [self.jr_header.indicatorView stopLoadingAnimation];
+    [self.jr_header stopRefresh];
     [self.jr_footer stopLoading];
 }
 
-- (void)jr_starRefresh {
-    [self.jr_header.indicatorView startLoadingAnimation];
+- (void)jr_headerRefresh {
+    [self.jr_header refresh];
 }
 
 - (void)jr_starLoadMore {

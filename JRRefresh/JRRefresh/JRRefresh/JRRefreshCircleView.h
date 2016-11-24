@@ -19,13 +19,15 @@
 @property (nonatomic, assign)BOOL updatingScrollViewOffset;
 
 - (id)initWithCenter:(CGPoint)center;
+- (instancetype)initWithFrame:(CGRect)frame;
+- (instancetype)init;
+
 - (void)setProgress:(double)progress scrollView:(UIScrollView*)scrollView;
 - (void)setIndicatorProgress:(double)progress;
 
 - (void)startLoadingAnimation;
 - (void)stopLoadingAnimation;
 - (void)showRoundCornerBG:(BOOL)show;
-
 
 
 @end

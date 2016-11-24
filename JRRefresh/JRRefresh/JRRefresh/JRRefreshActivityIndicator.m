@@ -51,7 +51,10 @@
     }
     return self;
 }
-
+- (void)setIndicatorImg:(UIImage *)indicatorImg {
+    _indicatorImg = indicatorImg;
+    self.imageLayer.contents = (__bridge id)(indicatorImg.CGImage);
+}
 - (void)showRoundCornerBG:(BOOL)show
 {
     self.bg.hidden = !show;

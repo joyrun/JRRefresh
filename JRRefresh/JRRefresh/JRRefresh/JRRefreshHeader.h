@@ -10,16 +10,35 @@
 #import "JRRefreshBaseView.h"
 @class JRRefreshCircleView;
 
+typedef void(^JRRefreshHeaderBegainRefreshBlock)();
+
+typedef void(^JRRefreshHeaderIndicatorStarAnimationBlock)();
+typedef void(^JRRefreshHeaderIndicatorStopAnimationBlock)();
+
+
+
 @interface JRRefreshHeader : JRRefreshBaseView
+
+
 
 @property (nonatomic, copy) void(^JRRefreshHeaderPullingBlock)(CGFloat percent);
 @property (nonatomic, copy) void(^JRRefreshHeaderEndRefreshCompletionBlock)();
-@property (nonatomic, copy) void(^JRRefreshHeaderBegainRefreshCompletionBlock)();
+
+
+@property (nonatomic, copy) JRRefreshHeaderBegainRefreshBlock begainRefreshBlock;
+@property (nonatomic, copy) JRRefreshHeaderIndicatorStarAnimationBlock starAnimationBlock;
+@property (nonatomic, copy) JRRefreshHeaderIndicatorStopAnimationBlock stopAnimationBlock;
+
+
 @property (nonatomic, assign) CGFloat pullPercent;
+@property (nonatomic, strong) UIView *indicatorView;
 
-@property (nonatomic, strong) JRRefreshCircleView *indicatorView;
 
-- (void)setIndicatorTopDistance:(CGFloat)distance;
++ (JRRefreshHeader *)headerWithRefreshBlock:(JRRefreshHeaderBegainRefreshBlock )refreshBlock;
+
+- (void)stopRefresh;
+- (void)refresh;
+
 
 
 @end

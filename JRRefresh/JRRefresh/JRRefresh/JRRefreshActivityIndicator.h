@@ -12,13 +12,16 @@
 
 
 @property (nonatomic, assign)BOOL isAnimating;
+@property (nonatomic, strong)UIImage *indicatorImg;
+
+
 
 - (id)initWithCenter:(CGPoint)center;
-
 - (void)startAnimating;
 - (void)stopAnimating;
 
 - (void)showRoundCornerBG:(BOOL)show;
+
 
 
 @end

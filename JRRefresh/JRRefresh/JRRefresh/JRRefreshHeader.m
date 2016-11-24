@@ -24,40 +24,59 @@
 
 @implementation JRRefreshHeader
 
++ (JRRefreshHeader *)headerWithRefreshBlock:(JRRefreshHeaderBegainRefreshBlock )refreshBlock {
+    
+    JRRefreshHeader *header = [[JRRefreshHeader alloc] init];
+    header.begainRefreshBlock = refreshBlock;
+    JRRefreshCircleView *circleView = [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(200, 20)];
+    header.indicatorView = circleView;
+    header.starAnimationBlock = ^() {
+        [circleView startLoadingAnimation];
+    };
+    header.stopAnimationBlock = ^() {
+        [circleView stopLoadingAnimation];
+    };
+    header.JRRefreshHeaderPullingBlock = ^(CGFloat percent) {
+        [circleView setProgress:percent];
+    };
+    return header;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
         [self FinishBlocks];
-        _defaulIndicatorTop = 10.0;
-        
-        
+        _defaulIndicatorTop = frame.origin.y;
     }
     return self;
 }
+
+
 - (instancetype)init {
     return [self initWithFrame:CGRectZero];
+}
+- (void)setFrame:(CGRect)frame {
+    super.frame = frame;
+    
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    
     [self.observersManager.scrollView addSubview:self.indicatorView];
 }
+
+
 - (void)FinishBlocks {
-    
     
     __weak typeof(self) weakSelf = self;
     
     [self.observersManager setScrollViewContentOffsetChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
         [weakSelf scrollViewContentOffsetChange:change scrollView:scrollView];
     }];
-    
     [self.observersManager setScrollViewContentSizeChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
         [weakSelf scrollViewContentSizeChange:change scrollView:scrollView];
     }];
-    
-    
     [self.observersManager setScrollViewGestureStateChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
         [weakSelf scrollViewGestureStateChange:change scrollView:scrollView];
     }];
@@ -114,8 +133,6 @@
     
     //指示器
     self.indicatorView.jr_top =  offSetY - happenOffSetY + _defaulIndicatorTop;
-    
-    [self.indicatorView setProgress:self.pullPercent scrollView:scrollView];
     JR_DebugLog(@"offset --: %f  happenOffsety-- :%f",offSetY,happenOffSetY);
 }
 
@@ -133,19 +150,26 @@
         return;
     }
     switch (state) {
-        case JRRefreshStateDefault:
+        case JRRefreshStateDefault:{
+            _isLoading = NO;
+            if (_stopAnimationBlock) {
+                _stopAnimationBlock();
+            }
+        }
             break;
         case JRRefreshStateWillRefreshPulling:
+  
             break;
         case JRRefreshStateNotRefreshPulling:
             break;
         case JRRefreshStateRefreshing:{
-            if (_JRRefreshHeaderBegainRefreshCompletionBlock) {
-                _JRRefreshHeaderBegainRefreshCompletionBlock();
-
+            if (_begainRefreshBlock) {
+                _begainRefreshBlock();
             }
-            [_indicatorView startLoadingAnimation];
-
+            if (_starAnimationBlock) {
+                _starAnimationBlock();
+            }
+            
             _isLoading = YES;
         }
             break;
@@ -159,15 +183,19 @@
     
 }
 
-- (void)setIndicatorTopDistance:(CGFloat)distance {
-    _defaulIndicatorTop = distance;
-    
+
+
+- (void)setIndicatorView:(JRRefreshCircleView *)indicatorView {
+    _indicatorView = indicatorView;
+    _defaulIndicatorTop = indicatorView.jr_top;
 }
 
-- (JRRefreshCircleView *)indicatorView{
-    if (!_indicatorView) {
-        _indicatorView =  [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(self.observersManager.scrollView.jr_centerX, 0)];
-    }
-    return _indicatorView;
+
+- (void)stopRefresh {
+    self.state = JRRefreshStateDefault;
+}
+
+- (void)refresh {
+    self.state = JRRefreshStateRefreshing;
 }
 @end

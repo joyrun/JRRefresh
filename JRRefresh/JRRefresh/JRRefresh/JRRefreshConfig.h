@@ -27,8 +27,7 @@
 /** 刷新控件的状态 */
 typedef NS_ENUM(NSInteger, JRRefreshState) {
     /** 普通闲置状态 */
-    JRRefreshStateDefault = 1,
-    
+    JRRefreshStateDefault = 0,
     /** 拖拽松开不会进行刷新的状态 */
     JRRefreshStateNotRefreshPulling,
     /** 松开就可以进行刷新的状态 */
