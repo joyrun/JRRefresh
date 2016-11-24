@@ -46,7 +46,6 @@
     }
     
     if ([keyPath isEqualToString:JRREFRESH_CONTENTSIZE]) {
-        [self scrollViewContentSizeChange:change];
         if (_ScrollViewContentSizeChangeBlock) {
             _ScrollViewContentSizeChangeBlock(change,self.scrollView);
         }
@@ -57,28 +56,16 @@
     }
     
     if ([keyPath isEqualToString:JRREFRESH_CONTENTOFFSET]) {
-        [self scrollViewContenOffSetChange:change];
         if (_ScrollViewContentOffsetChangeBlock) {
             _ScrollViewContentOffsetChangeBlock(change,self.scrollView);
         }
     }
     
     if ([keyPath isEqualToString:JRREFRESH_GESTURESTATE]) {
-        [self scrollViewGestureStateChange:change];
         if (_ScrollViewGestureStateChangeBlock) {
             _ScrollViewGestureStateChangeBlock(change,self.scrollView);
         }
     }
-    
-}
-
-- (void)scrollViewContentSizeChange:(NSDictionary *)change {
-    
-}
-- (void)scrollViewContenOffSetChange:(NSDictionary *)change {
-    
-}
-- (void)scrollViewGestureStateChange:(NSDictionary *)change {
     
 }
 

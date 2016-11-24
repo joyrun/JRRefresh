@@ -35,7 +35,7 @@
 
 - (void)drawInContext:(CGContextRef)ctx
 {
-    //Draw white circle
+    
     CGContextSetFillColor(ctx, CGColorGetComponents([UIColor clearColor].CGColor));
     CGContextFillEllipseInRect(ctx,CGRectInset(self.bounds, self.outlineWidth, self.outlineWidth));
 

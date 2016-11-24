@@ -27,7 +27,6 @@
 + (JRRefreshHeader *)headerWithRefreshBlock:(JRRefreshHeaderBegainRefreshBlock )refreshBlock {
     
     JRRefreshHeader *header = [[JRRefreshHeader alloc] init];
-    header.begainRefreshBlock = refreshBlock;
     JRRefreshCircleView *circleView = [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(200, 20)];
     header.indicatorView = circleView;
     header.starAnimationBlock = ^() {
@@ -39,6 +38,8 @@
     header.JRRefreshHeaderPullingBlock = ^(CGFloat percent) {
         [circleView setProgress:percent];
     };
+    header.begainRefreshBlock = refreshBlock;
+
     return header;
 }
 
@@ -146,9 +147,7 @@
 
 - (void)switchByState:(JRRefreshState)state {
 
-    if (_isLoading) {
-        return;
-    }
+
     switch (state) {
         case JRRefreshStateDefault:{
             _isLoading = NO;
@@ -193,9 +192,12 @@
 
 - (void)stopRefresh {
     self.state = JRRefreshStateDefault;
+    [self switchByState:self.state];
+    
 }
 
 - (void)refresh {
     self.state = JRRefreshStateRefreshing;
+    [self switchByState:self.state];
 }
 @end
