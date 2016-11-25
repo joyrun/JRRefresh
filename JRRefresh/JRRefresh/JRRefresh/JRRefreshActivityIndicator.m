@@ -62,25 +62,27 @@
 
 - (void)startAnimating
 {
+    
     self.hidden = NO;
     self.isAnimating = YES;
     
     CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
     animationImage.fromValue = [NSNumber numberWithFloat:JR_DEGREES_TO_RADIANS(360)];
     animationImage.toValue = [NSNumber numberWithFloat:JR_DEGREES_TO_RADIANS(0)];
-    animationImage.duration = 1.0;
+    animationImage.duration = 1;
     animationImage.removedOnCompletion = NO;
     animationImage.fillMode = kCAFillModeForwards;
     animationImage.repeatCount = MAXFLOAT;
     
     [self.imageLayer addAnimation:animationImage forKey:@"a"];
+    
+    
 }
 
 - (void)stopAnimating
 {
     self.hidden = YES;
     self.isAnimating = NO;
-    
     [self.imageLayer removeAllAnimations];
 }
 

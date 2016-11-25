@@ -42,6 +42,7 @@
         _defaulIndicatorTop = 10;
         _starRefreshDistance = 60.0;
         _isLoading = NO;
+        self.state = JRRefreshStateDefault;
     }
     return self;
 }
@@ -105,17 +106,16 @@
         if (self.pullPercent >= 1) { //超过
             if (self.state != JRRefreshStateWillRefreshPulling) {
                 self.state = JRRefreshStateWillRefreshPulling;
-                JR_DebugLog(@"JRRefreshStateWillRefreshPulling");
             }
         }
     }else {
         if (self.pullPercent >= 1) {
             if (self.state == JRRefreshStateWillRefreshPulling) {
                 self.state = JRRefreshStateRefreshing;
+                [self refresh];
             }
         }
     }
-    [self switchByState:self.state];
     
     
 }
@@ -125,43 +125,6 @@
 }
 
 - (void)scrollViewGestureStateChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
-    
-}
-
-- (void)switchByState:(JRRefreshState)state {
-
-
-    switch (state) {
-        case JRRefreshStateDefault:{
-            _isLoading = NO;
-            if (_stopAnimationBlock) {
-                _stopAnimationBlock();
-            }
-        }
-            break;
-        case JRRefreshStateWillRefreshPulling:
-  
-            break;
-        case JRRefreshStateNotRefreshPulling:
-            break;
-        case JRRefreshStateRefreshing:{
-            if (_begainRefreshBlock) {
-                _begainRefreshBlock();
-            }
-            if (_starAnimationBlock) {
-                _starAnimationBlock();
-            }
-            
-            _isLoading = YES;
-        }
-            break;
-        case JRRefreshStateWillRefresh:
-            break;
-        case JRRefreshStateNoMoreData:
-            break;
-        default:
-            break;
-    }
     
 }
 
@@ -176,13 +139,26 @@
 
 
 - (void)stopRefresh {
-    self.state = JRRefreshStateDefault;
-    [self switchByState:self.state];
-    
+    if (self.state != JRRefreshStateDefault) {
+        self.state = JRRefreshStateDefault;
+    }
+    if (_stopAnimationBlock) {
+        _stopAnimationBlock();
+    }
+    _isLoading = NO;
 }
 
 - (void)refresh {
-    self.state = JRRefreshStateRefreshing;
-    [self switchByState:self.state];
+    if (self.state != JRRefreshStateRefreshing) {
+        self.state = JRRefreshStateRefreshing;
+    }
+    if (_begainRefreshBlock) {
+        _begainRefreshBlock();
+    }
+    if (_starAnimationBlock) {
+        _starAnimationBlock();
+    }
+    _isLoading = YES;
+    
 }
 @end
