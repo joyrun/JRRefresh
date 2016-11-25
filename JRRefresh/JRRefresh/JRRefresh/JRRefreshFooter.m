@@ -11,25 +11,30 @@
 #import "JRRefreshActivityIndicator.h"
 #import "JRRefreshConfig.h"
 
-#define BOTTOM_LOAD_MORE_OFFSET -100.0f
+#define BOTTOM_LOAD_MORE_OFFSET - 80.0f
 
 @interface JRRefreshFooter ()
 
-@property (nonatomic, strong) JRRefreshActivityIndicator *defaultIndicator;
+
 @property (nonatomic, assign) BOOL isLoading;
 
 @end
 
 @implementation JRRefreshFooter
 
-
++ (JRRefreshFooter *)footerWithLoadBlock:(JRRefreshFooterBegainLoadBlock)loadBlock {
+    JRRefreshFooter *footer = [[JRRefreshFooter alloc] init];
+    footer.begainLoadBlock = loadBlock;
+    return footer;
+    
+    
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
         [self FinishBlocks];
-        [self addSubview:self.defaultIndicator];
     }
     return self;
 }
@@ -81,10 +86,14 @@
     if (_isLoading) {
         return;
     }
-    self.defaultIndicator.hidden = NO;
-    [self.defaultIndicator startAnimating];
+    _customIndicator.hidden = NO;
     _isLoading = YES;
-
+    if (_begainLoadBlock) {
+        _begainLoadBlock();
+    }
+    if (_starAnimationBlock) {
+        _starAnimationBlock();
+    }
     UIScrollView *scrollView = self.observersManager.scrollView;
     scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, scrollView.contentInset.left, scrollView.contentInset.bottom + JR_FOOTER_EXTEND, scrollView.contentInset.right);
 }
@@ -93,27 +102,21 @@
     if (!_isLoading) {
         return;
     }
-    [self.defaultIndicator stopAnimating];
-    self.defaultIndicator.hidden = YES;
+
+    if (_stopAnimationBlock) {
+        _stopAnimationBlock();
+    }
+    _customIndicator.hidden = YES;
     _isLoading = NO;
     
     UIScrollView *scrollView = self.observersManager.scrollView;
     scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, scrollView.contentInset.left, scrollView.contentInset.bottom - JR_FOOTER_EXTEND, scrollView.contentInset.right);
 }
 
-- (JRRefreshActivityIndicator *)defaultIndicator {
-    
-    if (!_defaultIndicator) {
-        _defaultIndicator = [[JRRefreshActivityIndicator alloc] initWithCenter:CGPointMake(self.jr_width / 2, 30)];
-        _defaultIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftAndRightMargin;
-    }
-    return _defaultIndicator;
-}
 
-- (void)setCustomIndicator:(JRRefreshActivityIndicator *)customIndicator {
+- (void)setCustomIndicator:(UIView *)customIndicator {
     _customIndicator = customIndicator;
-    _defaultIndicator = customIndicator;
-    
+    [self addSubview:customIndicator];
 }
 - (void)setIsHideFooter:(BOOL)isHideFooter {
     _isHideFooter = isHideFooter;

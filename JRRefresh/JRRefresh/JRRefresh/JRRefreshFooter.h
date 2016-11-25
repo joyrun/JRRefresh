@@ -9,18 +9,23 @@
 #import "JRRefreshBaseView.h"
 
 typedef void(^JRRefreshFooterBegainLoadBlock)(void);
+typedef void(^JRRefreshFooterStarAnimationBlock)(void);
+typedef void(^JRRefreshFooterStopAnimationBlock)(void);
 
-@class JRRefreshActivityIndicator;
 
 @interface JRRefreshFooter : JRRefreshBaseView
 
 
 
 @property (nonatomic, copy) JRRefreshFooterBegainLoadBlock begainLoadBlock;
-@property (nonatomic, assign) CGFloat pullPercent;
-@property (nonatomic, strong) JRRefreshActivityIndicator *customIndicator;
+@property (nonatomic, copy) JRRefreshFooterStarAnimationBlock starAnimationBlock;
+@property (nonatomic, copy) JRRefreshFooterStopAnimationBlock stopAnimationBlock;
+@property (nonatomic, strong) UIView *customIndicator;
 @property (nonatomic, assign) BOOL isHideFooter;
 
++ (JRRefreshFooter *)footerWithLoadBlock:(JRRefreshFooterBegainLoadBlock )loadBlock;
+
+- (void)starLoading;
 - (void)stopLoading;
 
 

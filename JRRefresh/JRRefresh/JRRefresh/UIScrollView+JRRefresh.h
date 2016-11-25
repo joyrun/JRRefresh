@@ -19,9 +19,11 @@
 
 
 - (void)jr_addHeaderWithRefreshBlock:(void(^)(void))refreshBlock;
-
+- (void)jr_addFooterWithRefreshBlock:(void(^)(void))refreshBlock;
 
 - (void)jr_headerRefresh;
+- (void)jr_headerStopRefresh;
+
 - (void)jr_starLoadMore;
 - (void)jr_stopLoading;
 - (void)jr_hideFooter;

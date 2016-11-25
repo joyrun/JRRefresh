@@ -13,6 +13,7 @@
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *datas;
 
 
 @end
@@ -27,31 +28,36 @@
     
     __weak typeof(self) weakSelf = self;
     [self.tableView jr_addHeaderWithRefreshBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView jr_stopLoading];
+            [_datas removeAllObjects];
+            for (int i = 0; i < 20; i++) {
+                [_datas addObject:@"cell data"];
+            }
+            [weakSelf.tableView reloadData];
         });
     }];
     
-    self.tableView.jr_footer = [[JRRefreshFooter alloc] init];
+    [self.tableView jr_addFooterWithRefreshBlock:^{
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            for (int i = 0; i < 20; i++) {
+                [_datas addObject:@"cell data"];
+            }
+            [weakSelf.tableView reloadData];
+            [weakSelf.tableView jr_stopLoading];
+        });
+        
+    }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf.tableView jr_headerRefresh];
-    });
+    
+   
 }
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor grayColor];
-        
-    }
-    return _tableView;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 50;
+    return self.datas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,8 +68,28 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.backgroundColor = [UIColor grayColor];
     }
+    cell.textLabel.text = [NSString stringWithFormat:@"cee %ld",(long)indexPath.row];
     return cell;
 }
+
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor grayColor];
+        
+    }
+    return _tableView;
+}
+- (NSMutableArray *)datas {
+    if (!_datas) {
+        _datas = [[NSMutableArray alloc] init];
+    }
+    return _datas;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -24,7 +24,7 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     
     if (jr_header != self.jr_header) {
         [self.jr_header removeFromSuperview];
-        [self insertSubview:jr_header atIndex:0];
+        [self addSubview:jr_header];
         objc_setAssociatedObject(self, &kJr_headerKey, jr_header, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
@@ -69,18 +69,7 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     self.jr_footer.isHideFooter= NO;
 }
 
-- (void)jr_setHeaderIndicatorView:(UIView *) indicatorView{
-    
-}
-- (UIView *)jr_headerIndicatorView {
-    return self.jr_header.indicatorView;
-}
-- (void)jr_setFooterIndicatorView:(UIView *) indicatorView{
-    
-}
-- (UIView *)jr_footerIndicatorView {
-    return self.jr_footer.customIndicator;
-}
+
 
 - (void)jr_addHeaderWithRefreshBlock:(void(^)(void))refreshBlock {
     
@@ -106,7 +95,23 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     [circleView showRoundCornerBG:YES];
     header.indicatorView = circleView;
     
+}
 
+- (void)jr_addFooterWithRefreshBlock:(void(^)(void))refreshBlock {
+    
+    JRRefreshFooter *footer = [JRRefreshFooter footerWithLoadBlock:refreshBlock];
+    self.jr_footer = footer;
+    JRRefreshActivityIndicator *indicator = [[JRRefreshActivityIndicator alloc] initWithCenter:CGPointMake(self.jr_width / 2, 30)];
+    indicator.autoresizingMask = UIViewAutoresizingFlexibleLeftAndRightMargin;
+    footer.customIndicator = indicator;
+    footer.starAnimationBlock = ^(){
+        [indicator startAnimating];
+    };
+    footer.stopAnimationBlock = ^(){
+        [indicator stopAnimating];
+    };
+
+    
 }
 
 @end
