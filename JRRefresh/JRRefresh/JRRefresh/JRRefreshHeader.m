@@ -93,7 +93,6 @@
         }
     }
     
-    
     //状态切换
     if (scrollView.isDragging) {
         if (self.pullPercent >= 1) { //超过
@@ -109,8 +108,6 @@
             }
         }
     }
-    
-    
 }
 
 

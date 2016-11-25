@@ -30,7 +30,7 @@
 - (void)jr_footerStopLoad;
 
 
-- (void)jr_hideFooter;
+- (void)jr_removeFooter;
 - (void)jr_showFooter;
 
 

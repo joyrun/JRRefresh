@@ -95,13 +95,13 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     [self.jr_header stopRefresh];
 }
 
-- (void)jr_footerstarLoad {
+- (void)jr_footerStarLoad {
     [self.jr_footer starLoading];
 }
 - (void)jr_footerStopLoad {
     [self.jr_footer stopLoading];
 }
-- (void)jr_hideFooter {
+- (void)jr_removeFooter {
     self.jr_footer.isHideFooter = YES;
 }
 - (void)jr_showFooter {
