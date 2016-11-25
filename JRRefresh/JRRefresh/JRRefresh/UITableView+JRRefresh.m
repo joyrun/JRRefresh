@@ -38,9 +38,8 @@
         totalCount = [self numberOfRowsInSection:i];
     }
     
-    
     if (totalCount == 0) {
-        [self jr_hideFooter];
+        [self jr_removeFooter];
     }else {
         [self jr_showFooter];
     }

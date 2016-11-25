@@ -23,7 +23,7 @@
 
 
 @implementation JRRefreshHeader
-
+#pragma mark - create methods
 + (JRRefreshHeader *)headerWithRefreshBlock:(JRRefreshHeaderBegainRefreshBlock )refreshBlock {
     
     JRRefreshHeader *header = [[JRRefreshHeader alloc] init];
@@ -32,7 +32,6 @@
     
     return header;
 }
-
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -52,7 +51,7 @@
     return [self initWithFrame:CGRectZero];
 }
 
-
+#pragma mark - Scroll Manager
 - (void)FinishBlocks {
     
     __weak typeof(self) weakSelf = self;
@@ -111,12 +110,7 @@
 }
 
 
-- (void)setIndicatorView:(UIView *)indicatorView {
-    _indicatorView = indicatorView;
-    [self addSubview:_indicatorView];
-    
-}
-
+#pragma mark - Action
 
 - (void)stopRefresh {
     if (self.state != JRRefreshStateDefault) {
@@ -139,6 +133,14 @@
         _starAnimationBlock();
     }
     _isLoading = YES;
+    
+}
+
+#pragma mark - Setter
+
+- (void)setIndicatorView:(UIView *)indicatorView {
+    _indicatorView = indicatorView;
+    [self addSubview:_indicatorView];
     
 }
 @end

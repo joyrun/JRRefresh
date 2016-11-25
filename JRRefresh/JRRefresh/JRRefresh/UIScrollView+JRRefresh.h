@@ -29,14 +29,11 @@
 - (void)jr_footerStarLoad;
 - (void)jr_footerStopLoad;
 
-
 - (void)jr_removeFooter;
 - (void)jr_showFooter;
 
-
-
-- (JRRefreshCircleView *)jr_headerDefaultIndicatorView;
-- (JRRefreshActivityIndicator *)jr_footerDefaultIndicator;
+- (JRRefreshCircleView *)jr_headerDefaultIndicatorView; /**获取header的默认指示器，进行icon图片，颜色,frame等的修改*/
+- (JRRefreshActivityIndicator *)jr_footerDefaultIndicator; /**获取footer的默认指示器，进行图片，frame等的修改*/
 
 
 @end

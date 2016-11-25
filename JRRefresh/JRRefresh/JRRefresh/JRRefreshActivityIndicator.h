@@ -11,7 +11,7 @@
 @interface JRRefreshActivityIndicator : UIView
 
 
-@property (nonatomic, assign)BOOL isAnimating;
+
 @property (nonatomic, strong)UIImage *indicatorImg;
 
 

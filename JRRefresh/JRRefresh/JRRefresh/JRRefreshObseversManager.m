@@ -39,6 +39,8 @@
     [self.panGesture removeObserver:self forKeyPath:JRREFRESH_GESTURESTATE];
     self.panGesture = nil;
 }
+
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     
     if (!self.subView.userInteractionEnabled) {

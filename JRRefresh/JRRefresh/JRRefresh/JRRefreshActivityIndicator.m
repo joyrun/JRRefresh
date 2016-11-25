@@ -14,9 +14,12 @@
 @interface JRRefreshActivityIndicator ()
 @property (nonatomic, strong) UIView *bg;
 @property (nonatomic, strong) CALayer *imageLayer;
+@property (nonatomic, assign)BOOL isAnimating;
 
 @end
 @implementation JRRefreshActivityIndicator
+
+#pragma mark - Create Methods
 - (id)initWithCenter:(CGPoint)center
 {
     int size = 25;
@@ -51,10 +54,8 @@
     }
     return self;
 }
-- (void)setIndicatorImg:(UIImage *)indicatorImg {
-    _indicatorImg = indicatorImg;
-    self.imageLayer.contents = (__bridge id)(indicatorImg.CGImage);
-}
+
+#pragma mark - Action
 - (void)showRoundCornerBG:(BOOL)show
 {
     self.bg.hidden = !show;
@@ -84,6 +85,12 @@
     self.hidden = YES;
     self.isAnimating = NO;
     [self.imageLayer removeAllAnimations];
+}
+
+#pragma mark - Setter
+- (void)setIndicatorImg:(UIImage *)indicatorImg {
+    _indicatorImg = indicatorImg;
+    self.imageLayer.contents = (__bridge id)(indicatorImg.CGImage);
 }
 
 @end

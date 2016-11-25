@@ -20,6 +20,8 @@ static NSString *kJr_headerKey = @"kJr_headerKey";
 static NSString *kJr_footerKey = @"kJr_footerKey";
 
 @implementation UIScrollView (JRRefresh)
+
+#pragma mark - Properties
 - (void)setJr_header:(JRRefreshHeader *)jr_header {
     
     if (jr_header != self.jr_header) {
@@ -49,7 +51,7 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 }
 
 
-
+#pragma mark - Add header and footer
 - (void)jr_addHeaderWithRefreshBlock:(void(^)(void))refreshBlock {
     
     JRRefreshHeader *header = [JRRefreshHeader headerWithRefreshBlock:refreshBlock];
@@ -87,7 +89,7 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     };
     
 }
-
+#pragma mark - Action
 - (void)jr_headerRefresh {
     [self.jr_header refresh];
 }
@@ -108,6 +110,8 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     self.jr_footer.isHideFooter= NO;
 }
 
+
+#pragma mark - Get indicator
 - (JRRefreshCircleView *)jr_headerDefaultIndicatorView {
     if ([self.jr_header.indicatorView isKindOfClass:[JRRefreshCircleView class]]) {
         return (JRRefreshCircleView *)self.jr_header.indicatorView;

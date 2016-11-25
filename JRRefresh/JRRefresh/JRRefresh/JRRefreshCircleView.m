@@ -30,7 +30,7 @@
 @implementation JRRefreshCircleView
 
 
-
+#pragma mark - Create methods
 - (id)initWithCenter:(CGPoint)center
 {
     float size = 25;
@@ -53,6 +53,8 @@
     return [self initWithFrame:CGRectZero];
 }
 
+
+#pragma mark - views
 - (void)_commonInit
 {
     
@@ -105,11 +107,6 @@
     [self setLayerOpacity:0];
 }
 
-- (void)showRoundCornerBG:(BOOL)show
-{
-    [self.activityIndicatorView showRoundCornerBG:show];
-}
-
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.shapeLayer.frame = self.bounds;
@@ -124,7 +121,8 @@
     self.shapeLayer.path = bezierPath.CGPath;
 }
 
-#pragma mark - property
+
+#pragma mark - Setters
 - (void)setProgress:(double)progress scrollView:(UIScrollView*)scrollView
 {
     CGFloat oldProgress = _progress;
@@ -191,6 +189,7 @@
     [super setCenter:center];
 }
 
+#pragma mark - Actions
 - (void)startLoadingAnimation
 {
     if (self.isLoading)
@@ -214,7 +213,10 @@
         [self.activityIndicatorView stopAnimating];
     }];
 }
-
+- (void)showRoundCornerBG:(BOOL)show
+{
+    [self.activityIndicatorView showRoundCornerBG:show];
+}
 
 
 @end

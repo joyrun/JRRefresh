@@ -22,12 +22,12 @@
 
 @implementation JRRefreshFooter
 
+
+#pragma mark - Create Methods
 + (JRRefreshFooter *)footerWithLoadBlock:(JRRefreshFooterBegainLoadBlock)loadBlock {
     JRRefreshFooter *footer = [[JRRefreshFooter alloc] init];
     footer.begainLoadBlock = loadBlock;
     return footer;
-    
-    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -41,6 +41,9 @@
 - (instancetype)init {
     return [self initWithFrame:CGRectZero];
 }
+
+
+#pragma mark - Scroll Manager
 - (void)FinishBlocks {
 
     __weak typeof(self) weakSelf = self;
@@ -52,10 +55,7 @@
     [self.observersManager setScrollViewContentSizeChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
         [weakSelf scrollViewContentSizeChange:change scrollView:scrollView];
     }];
-    
-    [self.observersManager setScrollViewGestureStateChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        [weakSelf scrollViewGestureStateChange:change scrollView:scrollView];
-    }];
+
     
 }
 
@@ -78,9 +78,9 @@
     self.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.jr_width, self.jr_height);
 }
 
-- (void)scrollViewGestureStateChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
-    
-}
+
+
+#pragma mark - Action
 - (void)starLoading {
 
     if (_isLoading) {
@@ -113,7 +113,7 @@
     scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, scrollView.contentInset.left, scrollView.contentInset.bottom - JR_FOOTER_EXTEND, scrollView.contentInset.right);
 }
 
-
+#pragma mark - Setter
 - (void)setCustomIndicator:(UIView *)customIndicator {
     _customIndicator = customIndicator;
     [self addSubview:customIndicator];

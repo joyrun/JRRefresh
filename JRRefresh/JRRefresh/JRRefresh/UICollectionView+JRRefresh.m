@@ -37,7 +37,7 @@
         totalCount = [self numberOfItemsInSection:i];
     }    
     if (totalCount == 0) {
-        [self jr_hideFooter];
+        [self jr_removeFooter];
     }else {
         [self jr_showFooter];
     }
