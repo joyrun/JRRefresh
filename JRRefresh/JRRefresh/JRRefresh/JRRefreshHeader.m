@@ -103,8 +103,10 @@
     //状态切换
     if (scrollView.isDragging) {
         if (self.pullPercent >= 1) { //超过
-            self.state = JRRefreshStateWillRefreshPulling;
-            JR_DebugLog(@"JRRefreshStateWillRefreshPulling");
+            if (self.state != JRRefreshStateWillRefreshPulling) {
+                self.state = JRRefreshStateWillRefreshPulling;
+                JR_DebugLog(@"JRRefreshStateWillRefreshPulling");
+            }
         }
     }else {
         if (self.pullPercent >= 1) {
