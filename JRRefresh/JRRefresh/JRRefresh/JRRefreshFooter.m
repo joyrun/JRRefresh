@@ -43,7 +43,6 @@
 }
 - (void)FinishBlocks {
 
-    
     __weak typeof(self) weakSelf = self;
     
     [self.observersManager setScrollViewContentOffsetChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
@@ -69,8 +68,9 @@
         return;
     }
     if (scrollView.contentOffset.y + scrollView.jr_height > BOTTOM_LOAD_MORE_OFFSET + scrollView.contentSize.height) {
-        [self starLoading];
-        JR_DebugLog(@" --scrollView.contentOffset.y %f",scrollView.contentOffset.y);
+        if (scrollView.contentSize.height > 0) {
+            [self starLoading];
+        }
     }
 }
 

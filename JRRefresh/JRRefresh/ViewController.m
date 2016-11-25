@@ -29,7 +29,7 @@
     __weak typeof(self) weakSelf = self;
     [self.tableView jr_addHeaderWithRefreshBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView jr_stopLoading];
+            [weakSelf.tableView jr_headerStopRefresh];
             [_datas removeAllObjects];
             for (int i = 0; i < 20; i++) {
                 [_datas addObject:@"cell data"];
@@ -40,13 +40,16 @@
     
     [self.tableView jr_addFooterWithRefreshBlock:^{
         
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             for (int i = 0; i < 20; i++) {
                 [_datas addObject:@"cell data"];
             }
             [weakSelf.tableView reloadData];
-            [weakSelf.tableView jr_stopLoading];
+            [weakSelf.tableView jr_footerStopLoad];
+            if (_datas.count == 100) {
+                [weakSelf.tableView jr_hideFooter];
+            }
+            
         });
         
     }];

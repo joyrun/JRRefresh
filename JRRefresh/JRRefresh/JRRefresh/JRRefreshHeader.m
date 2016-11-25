@@ -60,13 +60,6 @@
     [self.observersManager setScrollViewContentOffsetChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
         [weakSelf scrollViewContentOffsetChange:change scrollView:scrollView];
     }];
-    [self.observersManager setScrollViewContentSizeChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        [weakSelf scrollViewContentSizeChange:change scrollView:scrollView];
-    }];
-    [self.observersManager setScrollViewGestureStateChangeBlock:^(NSDictionary *change,UIScrollView *scrollView) {
-        [weakSelf scrollViewGestureStateChange:change scrollView:scrollView];
-    }];
-    
 }
 
 - (void)scrollViewContentOffsetChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
@@ -119,16 +112,6 @@
     
     
 }
-
-- (void)scrollViewContentSizeChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
-
-}
-
-- (void)scrollViewGestureStateChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
-    
-}
-
-
 
 
 - (void)setIndicatorView:(UIView *)indicatorView {

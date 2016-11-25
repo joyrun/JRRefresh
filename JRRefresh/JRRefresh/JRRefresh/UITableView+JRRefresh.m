@@ -32,8 +32,14 @@
 }
 
 - (void)customMethodAfterReloadData {
+
+    NSInteger totalCount = 0;
+    for (int i = 0; i<self.numberOfSections; i++) {
+        totalCount = [self numberOfRowsInSection:i];
+    }
     
-    if (self.numberOfSections == 0) {
+    
+    if (totalCount == 0) {
         [self jr_hideFooter];
     }else {
         [self jr_showFooter];

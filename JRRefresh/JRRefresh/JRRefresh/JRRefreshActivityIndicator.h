@@ -19,7 +19,6 @@
 - (id)initWithCenter:(CGPoint)center;
 - (void)startAnimating;
 - (void)stopAnimating;
-
 - (void)showRoundCornerBG:(BOOL)show;
 
 

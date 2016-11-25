@@ -10,6 +10,8 @@
 #import "JRRefreshHeader.h"
 #import "JRRefreshFooter.h"
 
+@class JRRefreshActivityIndicator;
+
 
 
 @interface UIScrollView (JRRefresh)
@@ -24,17 +26,17 @@
 - (void)jr_headerRefresh;
 - (void)jr_headerStopRefresh;
 
-- (void)jr_starLoadMore;
-- (void)jr_stopLoading;
+- (void)jr_footerStarLoad;
+- (void)jr_footerStopLoad;
+
+
 - (void)jr_hideFooter;
 - (void)jr_showFooter;
 
 
-- (void)jr_setHeaderIndicatorView:(UIView *) indicatorView;
-- (UIView *)jr_headerIndicatorView;
-- (void)jr_setFooterIndicatorView:(UIView *) indicatorView;
-- (UIView *)jr_footerIndicatorView;
 
+- (JRRefreshCircleView *)jr_headerDefaultIndicatorView;
+- (JRRefreshActivityIndicator *)jr_footerDefaultIndicator;
 
 
 @end

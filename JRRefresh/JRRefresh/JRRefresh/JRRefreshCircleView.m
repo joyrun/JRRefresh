@@ -22,7 +22,8 @@
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 @property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, assign) BOOL isLoading;
-
+@property (nonatomic, assign) double progress;
+@property (nonatomic, assign) BOOL updatingScrollViewOffset;
 
 @end
 

@@ -49,30 +49,8 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 }
 
 
-- (void)jr_stopLoading {
-    [self.jr_header stopRefresh];
-    [self.jr_footer stopLoading];
-}
-
-- (void)jr_headerRefresh {
-    [self.jr_header refresh];
-}
-
-- (void)jr_starLoadMore {
-    
-}
-
-- (void)jr_hideFooter {
-    self.jr_footer.isHideFooter = YES;
-}
-- (void)jr_showFooter {
-    self.jr_footer.isHideFooter= NO;
-}
-
-
 
 - (void)jr_addHeaderWithRefreshBlock:(void(^)(void))refreshBlock {
-    
     
     JRRefreshHeader *header = [JRRefreshHeader headerWithRefreshBlock:refreshBlock];
     self.jr_header = header;
@@ -80,17 +58,14 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     JRRefreshCircleView *circleView = [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(header.jr_centerX, 20)];
     circleView.autoresizingMask = UIViewAutoresizingFlexibleLeftAndRightMargin;
     
-    __weak typeof(self) weakSelf = self;
     header.starAnimationBlock = ^() {
         [circleView startLoadingAnimation];
     };
-    
     header.stopAnimationBlock = ^() {
         [circleView stopLoadingAnimation];
     };
     header.JRRefreshHeaderPullingBlock = ^(CGFloat percent) {
-        [circleView setProgress:percent scrollView:weakSelf];
-
+        [circleView setIndicatorProgress:percent];
     };
     [circleView showRoundCornerBG:YES];
     header.indicatorView = circleView;
@@ -110,8 +85,42 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     footer.stopAnimationBlock = ^(){
         [indicator stopAnimating];
     };
-
     
 }
+
+- (void)jr_headerRefresh {
+    [self.jr_header refresh];
+}
+- (void)jr_headerStopRefresh {
+    [self.jr_header stopRefresh];
+}
+
+- (void)jr_footerstarLoad {
+    [self.jr_footer starLoading];
+}
+- (void)jr_footerStopLoad {
+    [self.jr_footer stopLoading];
+}
+- (void)jr_hideFooter {
+    self.jr_footer.isHideFooter = YES;
+}
+- (void)jr_showFooter {
+    self.jr_footer.isHideFooter= NO;
+}
+
+- (JRRefreshCircleView *)jr_headerDefaultIndicatorView {
+    if ([self.jr_header.indicatorView isKindOfClass:[JRRefreshCircleView class]]) {
+        return (JRRefreshCircleView *)self.jr_header.indicatorView;
+    }
+    return nil;
+}
+
+- (JRRefreshActivityIndicator *)jr_footerDefaultIndicator {
+    if ([self.jr_footer.customIndicator isKindOfClass:[JRRefreshActivityIndicator class]]) {
+        return (JRRefreshActivityIndicator *)self.jr_footer.customIndicator;
+    }
+    return nil;
+}
+
 
 @end
