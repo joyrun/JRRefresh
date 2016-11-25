@@ -10,6 +10,8 @@
 #import "JRRefreshConfig.h"
 #import "UIView+JRAddition.h"
 
+#define DEFAULT_HEADER_HEIGHT 40.0
+
 
 @implementation JRRefreshObseversManager
 
@@ -18,9 +20,7 @@
 - (void)willAddSubview:(UIView *)subView toSuperView:(UIView *)superView {
     self.subView = subView;
     self.scrollView = (UIScrollView *)superView;
-    
-    self.subView.jr_width = superView.jr_width;
-    self.subView.jr_left = 0;
+    self.subView.frame = CGRectMake(0, 0, superView.jr_width, DEFAULT_HEADER_HEIGHT);
     _scrollView.alwaysBounceVertical = YES;
     [self addObservers];
     

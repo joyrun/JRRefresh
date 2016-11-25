@@ -132,13 +132,15 @@
     if(oldProgress != self.progress)
     {
         //to prevent showing in some circumstances (updating contentOffset)
-        if(scrollView.isDragging || scrollView.isDecelerating || self.updatingScrollViewOffset || oldProgress > self.progress)
-        {
-            [self setIndicatorProgress:progress];
-            
-        }
+//        if(scrollView.isDragging || scrollView.isDecelerating || self.updatingScrollViewOffset || oldProgress > self.progress)
+//        {
+//            
+//        }
+        [self setIndicatorProgress:progress];
+
     }
     
+
 }
 
 - (void)setIndicatorProgress:(double)progress {

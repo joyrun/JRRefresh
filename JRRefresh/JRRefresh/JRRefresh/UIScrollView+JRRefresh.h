@@ -18,6 +18,9 @@
 @property (nonatomic,strong) JRRefreshFooter *jr_footer;
 
 
+- (void)jr_addHeaderWithRefreshBlock:(void(^)(void))refreshBlock;
+
+
 - (void)jr_headerRefresh;
 - (void)jr_starLoadMore;
 - (void)jr_stopLoading;

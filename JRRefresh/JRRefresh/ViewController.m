@@ -24,14 +24,19 @@
     [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor grayColor];
     
-    self.tableView.jr_header = [JRRefreshHeader headerWithRefreshBlock:^{
+    
+    __weak typeof(self) weakSelf = self;
+    [self.tableView jr_addHeaderWithRefreshBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.tableView jr_stopLoading];
+            [weakSelf.tableView jr_stopLoading];
         });
     }];
     
     self.tableView.jr_footer = [[JRRefreshFooter alloc] init];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf.tableView jr_headerRefresh];
+    });
 }
 
 - (UITableView *)tableView {

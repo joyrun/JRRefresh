@@ -26,8 +26,6 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
         [self.jr_header removeFromSuperview];
         [self insertSubview:jr_header atIndex:0];
         objc_setAssociatedObject(self, &kJr_headerKey, jr_header, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        self.jr_header.backgroundColor = [UIColor whiteColor];
-        
     }
     
 }
@@ -84,6 +82,31 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     return self.jr_footer.customIndicator;
 }
 
+- (void)jr_addHeaderWithRefreshBlock:(void(^)(void))refreshBlock {
+    
+    
+    JRRefreshHeader *header = [JRRefreshHeader headerWithRefreshBlock:refreshBlock];
+    self.jr_header = header;
+    
+    JRRefreshCircleView *circleView = [[JRRefreshCircleView alloc] initWithCenter:CGPointMake(header.jr_centerX, 20)];
+    circleView.autoresizingMask = UIViewAutoresizingFlexibleLeftAndRightMargin;
+    
+    __weak typeof(self) weakSelf = self;
+    header.starAnimationBlock = ^() {
+        [circleView startLoadingAnimation];
+    };
+    
+    header.stopAnimationBlock = ^() {
+        [circleView stopLoadingAnimation];
+    };
+    header.JRRefreshHeaderPullingBlock = ^(CGFloat percent) {
+        [circleView setProgress:percent scrollView:weakSelf];
 
+    };
+    [circleView showRoundCornerBG:YES];
+    header.indicatorView = circleView;
+    
+
+}
 
 @end

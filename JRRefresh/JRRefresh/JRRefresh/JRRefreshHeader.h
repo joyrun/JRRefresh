@@ -30,6 +30,7 @@ typedef void(^JRRefreshHeaderIndicatorStopAnimationBlock)();
 @property (nonatomic, copy) JRRefreshHeaderIndicatorStopAnimationBlock stopAnimationBlock;
 
 
+@property (nonatomic, assign) CGFloat starRefreshDistance;
 @property (nonatomic, assign) CGFloat pullPercent;
 @property (nonatomic, strong) UIView *indicatorView;
 
@@ -38,6 +39,7 @@ typedef void(^JRRefreshHeaderIndicatorStopAnimationBlock)();
 
 - (void)stopRefresh;
 - (void)refresh;
+
 
 
 

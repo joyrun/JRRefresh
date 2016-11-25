@@ -8,14 +8,15 @@
 
 #import "JRRefreshBaseView.h"
 
+typedef void(^JRRefreshFooterBegainLoadBlock)(void);
+
 @class JRRefreshActivityIndicator;
 
 @interface JRRefreshFooter : JRRefreshBaseView
 
-@property (nonatomic, copy) void(^JRRefreshHeaderPullingBlock)(CGFloat percent);
-@property (nonatomic, copy) void(^JRRefreshHeaderEndRefreshCompletionBlock)();
-@property (nonatomic, copy) void(^JRRefreshHeaderBegainRefreshCompletionBlock)();
 
+
+@property (nonatomic, copy) JRRefreshFooterBegainLoadBlock begainLoadBlock;
 @property (nonatomic, assign) CGFloat pullPercent;
 @property (nonatomic, strong) JRRefreshActivityIndicator *customIndicator;
 @property (nonatomic, assign) BOOL isHideFooter;
