@@ -11,6 +11,7 @@
 @interface UICollectionView (JRRefresh)
 
 
+@property (nonatomic, assign, readonly) NSInteger dataCount;
 
 
 @end

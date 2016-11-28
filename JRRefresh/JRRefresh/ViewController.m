@@ -47,7 +47,7 @@
             [weakSelf.tableView reloadData];
             [weakSelf.tableView jr_footerStopLoad];
             if (_datas.count == 100) {
-                [weakSelf.tableView jr_hideFooter];
+                [weakSelf.tableView jr_removeFooter];
             }
             
         });

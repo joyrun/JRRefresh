@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UITableView (JRRefresh)
+@property (nonatomic, assign, readonly) NSInteger dataCount;
 
 @end
