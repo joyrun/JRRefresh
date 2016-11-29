@@ -43,7 +43,7 @@
     }
     
 }
-- (NSInteger)dataCount {
+- (NSInteger)jr_dataCount {
     NSInteger totalCount = 0;
     for (int i = 0; i<self.numberOfSections; i++) {
         totalCount = [self numberOfItemsInSection:i];
