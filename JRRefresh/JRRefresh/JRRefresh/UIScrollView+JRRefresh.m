@@ -93,6 +93,11 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 - (void)jr_headerRefresh {
     [self.jr_header refresh];
 }
+- (void)jr_headerRefreshWithoutAnimation {
+    if (self.jr_header.begainRefreshBlock) {
+        self.jr_header.begainRefreshBlock();
+    }
+}
 - (void)jr_headerStopRefresh {
     [self.jr_header stopRefresh];
 }

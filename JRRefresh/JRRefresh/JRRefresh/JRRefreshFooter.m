@@ -56,7 +56,6 @@
         [weakSelf scrollViewContentSizeChange:change scrollView:scrollView];
     }];
 
-    
 }
 
 - (void)scrollViewContentOffsetChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {

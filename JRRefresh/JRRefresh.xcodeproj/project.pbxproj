@@ -20,7 +20,6 @@
 		5E0770811DDDA1C2002688D0 /* JRRefreshObseversManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E07707A1DDDA1C2002688D0 /* JRRefreshObseversManager.m */; };
 		5E0770821DDDA1C2002688D0 /* UIScrollView+JRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E07707C1DDDA1C2002688D0 /* UIScrollView+JRRefresh.m */; };
 		5E0770831DDDA1C2002688D0 /* UIView+JRAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E07707E1DDDA1C2002688D0 /* UIView+JRAddition.m */; };
-		5E284ADB1DE84197008CC058 /* resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E284ADA1DE84197008CC058 /* resources.bundle */; };
 		5EC608981DE546E0000A8729 /* UITableView+JRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC608971DE546E0000A8729 /* UITableView+JRRefresh.m */; };
 		5EC6089B1DE54722000A8729 /* UICollectionView+JRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6089A1DE54722000A8729 /* UICollectionView+JRRefresh.m */; };
 		5EE91D231DE3E6E3009101D2 /* JRRefreshActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE91D221DE3E6E3009101D2 /* JRRefreshActivityIndicator.m */; };
@@ -75,7 +74,6 @@
 		5E07707C1DDDA1C2002688D0 /* UIScrollView+JRRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+JRRefresh.m"; sourceTree = "<group>"; };
 		5E07707D1DDDA1C2002688D0 /* UIView+JRAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JRAddition.h"; sourceTree = "<group>"; };
 		5E07707E1DDDA1C2002688D0 /* UIView+JRAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JRAddition.m"; sourceTree = "<group>"; };
-		5E284ADA1DE84197008CC058 /* resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = resources.bundle; sourceTree = "<group>"; };
 		5EC608961DE546E0000A8729 /* UITableView+JRRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+JRRefresh.h"; sourceTree = "<group>"; };
 		5EC608971DE546E0000A8729 /* UITableView+JRRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+JRRefresh.m"; sourceTree = "<group>"; };
 		5EC608991DE54722000A8729 /* UICollectionView+JRRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+JRRefresh.h"; sourceTree = "<group>"; };
@@ -205,9 +203,16 @@
 				5EE91D251DE3E917009101D2 /* JRRefreshCircleView.m */,
 				5EE91D271DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.h */,
 				5EE91D281DE3E95E009101D2 /* JRRefreshCircleViewBgLayer.m */,
-				5E284ADA1DE84197008CC058 /* resources.bundle */,
+				5E510E1D1DF565B2003BF900 /* CustomHeader */,
 			);
 			path = JRRefresh;
+			sourceTree = "<group>";
+		};
+		5E510E1D1DF565B2003BF900 /* CustomHeader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,7 +327,6 @@
 				5E07704F1DDDA1A3002688D0 /* LaunchScreen.storyboard in Resources */,
 				5E07704C1DDDA1A3002688D0 /* Assets.xcassets in Resources */,
 				5E07704A1DDDA1A3002688D0 /* Main.storyboard in Resources */,
-				5E284ADB1DE84197008CC058 /* resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

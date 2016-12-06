@@ -26,6 +26,15 @@
     self.view.backgroundColor = [UIColor grayColor];
     
     
+ 
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.jr_width, 100)];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -400, view.jr_width, 500)];
+    imgView.backgroundColor = [UIColor yellowColor];
+    [view addSubview:imgView];
+    self.tableView.tableHeaderView = view;
+    
     __weak typeof(self) weakSelf = self;
     [self.tableView jr_addHeaderWithRefreshBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -46,14 +55,11 @@
             }
             [weakSelf.tableView reloadData];
             [weakSelf.tableView jr_footerStopLoad];
-            if (_datas.count == 100) {
+            if (_datas.count == 80) {
                 [weakSelf.tableView jr_removeFooter];
             }
-            
         });
-        
     }];
-    
     
    
 }
