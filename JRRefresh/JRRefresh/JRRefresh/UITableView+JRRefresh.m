@@ -27,21 +27,25 @@
 
 - (void)jr_reloadData {
     [self jr_reloadData];
-    [self customMethodAfterReloadData];
+    
+    if (self.jr_header || self.jr_footer) {
+        [self customMethodAfterReloadData];
+    }
     
 }
 
-- (void)customMethodAfterReloadData {
 
+- (void)customMethodAfterReloadData {
+    
     NSInteger totalCount = 0;
     for (int i = 0; i<self.numberOfSections; i++) {
         totalCount = [self numberOfRowsInSection:i];
     }
     
     if (totalCount == 0) {
-        [self jr_removeFooter];
+        self.jr_footer.isHideFooter = YES;
     }else {
-        [self jr_showFooter];
+        self.jr_footer.isHideFooter = NO;
     }
     
 }

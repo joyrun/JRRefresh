@@ -62,11 +62,16 @@
 }
 
 - (void)scrollViewContentOffsetChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
-    
+        
     self.originalInset = scrollView.contentInset;
     CGFloat offSetY = scrollView.contentOffset.y;
     CGFloat happenOffSetY = - self.originalInset.top; //offSetY初始值不一定为0，需与happenOffSetY结合使用
     self.jr_top = offSetY - happenOffSetY;
+    
+    NSArray *subViews = scrollView.subviews;
+    if (subViews.lastObject != self) {
+        [scrollView bringSubviewToFront:self];
+    }
     
     if (self.state == JRRefreshStateRefreshing) {
         return;
@@ -74,6 +79,7 @@
 
     
     if (offSetY > happenOffSetY) {
+        _JRRefreshHeaderPullingBlock(0.0);
         return;
     }
     
@@ -133,7 +139,8 @@
         _starAnimationBlock();
     }
     _isLoading = YES;
-    
+    [self.observersManager.scrollView bringSubviewToFront:self];
+ 
 }
 
 #pragma mark - Setter

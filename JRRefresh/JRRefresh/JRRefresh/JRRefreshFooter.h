@@ -22,6 +22,10 @@ typedef void(^JRRefreshFooterStopAnimationBlock)(void);
 @property (nonatomic, copy) JRRefreshFooterStopAnimationBlock stopAnimationBlock;
 @property (nonatomic, strong) UIView *customIndicator;
 @property (nonatomic, assign) BOOL isHideFooter;
+@property (nonatomic, assign) BOOL manualHideFooter;
+@property (nonatomic, assign) CGFloat preLoadOffset;
+
+
 
 + (JRRefreshFooter *)footerWithLoadBlock:(JRRefreshFooterBegainLoadBlock )loadBlock;
 

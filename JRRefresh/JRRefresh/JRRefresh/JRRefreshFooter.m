@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign) BOOL isLoading;
 
+
 @end
 
 @implementation JRRefreshFooter
@@ -35,6 +36,7 @@
     if (self) {
         
         [self FinishBlocks];
+        _preLoadOffset = -10.0;
     }
     return self;
 }
@@ -56,6 +58,7 @@
         [weakSelf scrollViewContentSizeChange:change scrollView:scrollView];
     }];
 
+    
 }
 
 - (void)scrollViewContentOffsetChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
@@ -66,7 +69,7 @@
     if (_isHideFooter) {
         return;
     }
-    if (scrollView.contentOffset.y + scrollView.jr_height > BOTTOM_LOAD_MORE_OFFSET + scrollView.contentSize.height) {
+    if (scrollView.contentOffset.y + scrollView.jr_height > - _preLoadOffset + scrollView.contentSize.height) {
         if (scrollView.contentSize.height > 0) {
             [self starLoading];
         }
@@ -75,6 +78,11 @@
 
 - (void)scrollViewContentSizeChange:(NSDictionary *)change scrollView:(UIScrollView *)scrollView {
     self.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.jr_width, self.jr_height);
+    if (scrollView.contentSize.height < scrollView.jr_height) {
+        self.isHideFooter = YES;
+    }else {
+        self.isHideFooter = _manualHideFooter;
+    }
 }
 
 
@@ -121,6 +129,9 @@
     _isHideFooter = isHideFooter;
     self.hidden = isHideFooter;
 }
-
+- (void)setManualHideFooter:(BOOL)manualHideFooter {
+    _manualHideFooter = manualHideFooter;
+    self.isHideFooter = manualHideFooter;
+}
 
 @end

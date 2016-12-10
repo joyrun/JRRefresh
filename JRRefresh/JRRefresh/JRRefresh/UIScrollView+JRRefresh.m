@@ -20,7 +20,49 @@ static NSString *kJr_headerKey = @"kJr_headerKey";
 static NSString *kJr_footerKey = @"kJr_footerKey";
 
 @implementation UIScrollView (JRRefresh)
+#pragma mark - Hook
 
++ (void)load {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+
+        Method m1 = class_getInstanceMethod([self class], @selector(didAddSubview:));
+        Method m2 = class_getInstanceMethod([self class], @selector(jr_didAddSubview:));
+        
+        BOOL isSuccess = class_addMethod([self class], @selector(didAddSubview:), method_getImplementation(m2), method_getTypeEncoding(m2));
+        if (isSuccess) {
+            // 添加成功：说明源方法m1现在的实现为交换方法m2的实现，现在将源方法m1的实现替换到交换方法m2中
+            
+            class_replaceMethod([self class], @selector(jr_didAddSubview:), method_getImplementation(m1), method_getTypeEncoding(m1));
+        }else {
+            //添加失败：说明源方法已经有实现，直接将两个方法的实现交换即
+            method_exchangeImplementations(m1, m2);
+        }
+        
+    });
+    
+}
+- (void)jr_didAddSubview:(UIView *)subview {
+
+    [self jr_didAddSubview:subview];
+    if (self.jr_header || self.jr_footer) {
+        [self jr_customMethod];
+    }
+
+}
+
+- (void)jr_customMethod {
+ 
+    if (self.jr_header) {
+        [self bringSubviewToFront:self.jr_header];
+    }
+    if (self.jr_footer) {
+        [self bringSubviewToFront:self.jr_footer];
+    }
+    
+}
 #pragma mark - Properties
 - (void)setJr_header:(JRRefreshHeader *)jr_header {
     
@@ -89,6 +131,8 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     };
     
 }
+
+
 #pragma mark - Action
 - (void)jr_headerRefresh {
     [self.jr_header refresh];
@@ -101,7 +145,6 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
 - (void)jr_headerStopRefresh {
     [self.jr_header stopRefresh];
 }
-
 - (void)jr_footerStarLoad {
     [self.jr_footer starLoading];
 }
@@ -109,12 +152,15 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     [self.jr_footer stopLoading];
 }
 - (void)jr_removeFooter {
-    self.jr_footer.isHideFooter = YES;
+    self.jr_footer.manualHideFooter = YES;
 }
 - (void)jr_showFooter {
-    self.jr_footer.isHideFooter= NO;
+    self.jr_footer.manualHideFooter= NO;
 }
 
+- (void)jr_setFooterPreLoadOffset:(CGFloat)offset {
+    self.jr_footer.preLoadOffset = offset;
+}
 
 #pragma mark - Get indicator
 - (JRRefreshCircleView *)jr_headerDefaultIndicatorView {
@@ -130,6 +176,5 @@ static NSString *kJr_footerKey = @"kJr_footerKey";
     }
     return nil;
 }
-
 
 @end

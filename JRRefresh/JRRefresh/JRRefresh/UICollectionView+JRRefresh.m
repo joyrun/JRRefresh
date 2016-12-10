@@ -26,7 +26,10 @@
 
 - (void)jr_reloadData {
     [self jr_reloadData];
-    [self customMethodAfterReloadData];
+    
+    if (self.jr_header || self.jr_footer) {
+        [self customMethodAfterReloadData];
+    }
     
 }
 
@@ -37,10 +40,11 @@
         totalCount = [self numberOfItemsInSection:i];
     }    
     if (totalCount == 0) {
-        [self jr_removeFooter];
+        self.jr_footer.isHideFooter = YES;
     }else {
-        [self jr_showFooter];
+        self.jr_footer.isHideFooter = NO;
     }
+    
     
 }
 - (NSInteger)jr_dataCount {
